@@ -9,6 +9,9 @@ export const TeamAmbience: React.FC = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
     <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 20% 50%, rgba(196, 85, 85, 0.04) 0%, transparent 60%)' }} />
     <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 80% 30%, rgba(138, 155, 196, 0.03) 0%, transparent 50%)' }} />
+    {[{x:10,y:25},{x:88,y:15},{x:35,y:70},{x:62,y:40},{x:20,y:85},{x:75,y:60},{x:48,y:18},{x:92,y:75}].map((p,i) => (
+      <div key={`ta-${i}`} className="absolute rounded-full animate-float" style={{ left: `${p.x}%`, top: `${p.y}%`, width: 2 + (i % 2), height: 2 + (i % 2), background: i % 2 === 0 ? 'rgba(196,85,85,0.35)' : 'rgba(138,155,196,0.25)', animationDuration: `${8 + (i % 3) * 3}s`, animationDelay: `${i * 0.6}s` }} />
+    ))}
   </div>
 );
 
@@ -18,7 +21,6 @@ export const EpisodeVibes: React.FC = () => {
     <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
       <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 80%, rgba(196, 85, 85, 0.04) 0%, transparent 60%)' }} />
       <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 20% 20%, rgba(138, 155, 196, 0.03) 0%, transparent 50%)' }} />
-      {/* Subtle animated glow */}
       {!isMobile && (
         <motion.div className="absolute"
           style={{ left: '30%', top: '30%', width: '40%', height: '40%', background: 'radial-gradient(ellipse, rgba(196,85,85,0.03) 0%, transparent 70%)', filter: 'blur(40px)' }}
@@ -26,6 +28,10 @@ export const EpisodeVibes: React.FC = () => {
           transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
         />
       )}
+      {/* Floating particles */}
+      {[{x:5,y:10},{x:90,y:15},{x:20,y:50},{x:75,y:35},{x:40,y:75},{x:60,y:20},{x:30,y:85},{x:85,y:60},{x:15,y:40},{x:55,y:90},{x:45,y:30},{x:70,y:70}].map((p,i) => (
+        <div key={`ev-${i}`} className="absolute rounded-full animate-float" style={{ left: `${p.x}%`, top: `${p.y}%`, width: 2 + (i % 3), height: 2 + (i % 3), background: i % 2 === 0 ? 'rgba(196,85,85,0.4)' : 'rgba(138,155,196,0.3)', animationDuration: `${7 + (i % 4) * 2}s`, animationDelay: `${i * 0.5}s` }} />
+      ))}
     </div>
   );
 };

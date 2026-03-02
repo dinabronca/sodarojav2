@@ -208,6 +208,12 @@ const SubscriberDashboard: React.FC = () => {
 
   return (
     <div className="space-y-10 relative" style={{ zIndex: 2 }}>
+      {/* Particles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+        {[{ x: 8, y: 20 },{ x: 85, y: 12 },{ x: 25, y: 65 },{ x: 70, y: 40 },{ x: 45, y: 80 },{ x: 92, y: 55 },{ x: 15, y: 42 },{ x: 60, y: 15 },{ x: 35, y: 88 },{ x: 78, y: 72 }].map((p, i) => (
+          <div key={`fi-${i}`} className="absolute rounded-full animate-float" style={{ left: `${p.x}%`, top: `${p.y}%`, width: 2 + (i % 3), height: 2 + (i % 3), background: i % 2 === 0 ? 'rgba(196,85,85,0.4)' : 'rgba(138,155,196,0.3)', animationDuration: `${8 + (i % 4) * 2}s`, animationDelay: `${i * 0.7}s` }} />
+        ))}
+      </div>
       {/* ===== HEADER — Editorial style ===== */}
       <div className="text-center">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="space-y-5">

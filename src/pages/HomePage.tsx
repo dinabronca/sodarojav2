@@ -102,6 +102,12 @@ export const HomePage: React.FC = () => {
 
       {/* ===== TESTIMONIOS ===== */}
       <section className="relative py-20 sm:py-28 px-6 overflow-hidden">
+        {/* Particles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[{x:12,y:20},{x:78,y:10},{x:40,y:75},{x:88,y:50},{x:25,y:45},{x:65,y:85},{x:50,y:15},{x:5,y:65}].map((p,i) => (
+            <div key={`te-${i}`} className="absolute rounded-full animate-float" style={{ left: `${p.x}%`, top: `${p.y}%`, width: 2, height: 2, background: i % 2 === 0 ? 'rgba(196,85,85,0.35)' : 'rgba(212,197,176,0.2)', animationDuration: `${9 + i * 1.5}s`, animationDelay: `${i * 0.8}s` }} />
+          ))}
+        </div>
         <div className="max-w-5xl mx-auto relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <p className="text-soda-lamp/30 text-[9px] tracking-[0.4em] uppercase text-center mb-14">Lo que dicen los oyentes</p>
