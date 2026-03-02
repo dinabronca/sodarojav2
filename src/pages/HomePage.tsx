@@ -6,7 +6,6 @@ import { Hero } from '../components/Hero';
 import { EpisodeCard } from '../components/EpisodeCard';
 import { DestinationsMap } from '../components/DestinationsMap';
 import { CityMarquee } from '../components/CityMarquee';
-import { SectionGradient } from '../components/SectionGradient';
 import { getContent } from '../data/content';
 import { demoEpisodes } from '../data/episodes';
 
@@ -38,6 +37,17 @@ export const HomePage: React.FC = () => {
       <section id="episodios" className="relative py-24 sm:py-32 px-4 sm:px-6">
         <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
           <div className="absolute" style={{ left: '-5%', bottom: '10%', width: '50%', height: '50%', background: 'radial-gradient(ellipse, rgba(196,85,85,0.03) 0%, transparent 60%)', filter: 'blur(50px)' }} />
+          <div className="absolute" style={{ right: '-5%', top: '20%', width: '40%', height: '40%', background: 'radial-gradient(ellipse, rgba(138,155,196,0.03) 0%, transparent 60%)', filter: 'blur(50px)' }} />
+        </div>
+        {/* Floating particles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[...Array(12)].map((_, i) => (
+            <motion.div key={`ep-${i}`} className="absolute rounded-full"
+              style={{ left: `${3 + (i * 8) % 94}%`, top: `${5 + (i * 9) % 90}%`, width: 2 + (i % 3), height: 2 + (i % 3), background: i % 2 === 0 ? 'rgba(196,85,85,0.35)' : 'rgba(138,155,196,0.25)' }}
+              animate={{ y: [0, -35, 0], opacity: [0.1, 0.5, 0.1] }}
+              transition={{ duration: 7 + (i % 4) * 2, repeat: Infinity, delay: i * 0.6, ease: 'easeInOut' }}
+            />
+          ))}
         </div>
         <div className="max-w-7xl mx-auto relative z-10">
 
@@ -66,12 +76,10 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <SectionGradient variant="red" />
 
       {/* ===== MAPA DE DESTINOS ===== */}
       <DestinationsMap />
 
-      <SectionGradient variant="blue" flip />
 
       {/* ===== ESCUCHÁ EN ===== */}
       <section className="relative py-20 sm:py-28 px-6">
@@ -96,7 +104,6 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <SectionGradient variant="neutral" />
 
       {/* ===== TESTIMONIOS ===== */}
       <section className="relative py-20 sm:py-28 px-6 overflow-hidden">

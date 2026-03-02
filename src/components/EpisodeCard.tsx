@@ -43,23 +43,6 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
     } catch {}
   };
 
-  // Parallax for card images
-  React.useEffect(() => {
-    if (isMobile) return;
-    const container = document.querySelector(`[data-ep-id="${episode.id}"]`);
-    const img = container?.querySelector('.parallax-img') as HTMLElement;
-    if (!img) return;
-    const handleScroll = () => {
-      const rect = container!.getBoundingClientRect();
-      const center = rect.top + rect.height / 2;
-      const offset = (center - window.innerHeight / 2) / window.innerHeight;
-      img.style.transform = `translateY(${offset * -12}px)`;
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [episode.id, isMobile]);
-
   useEffect(() => {
     if (isExpanded) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = '';
@@ -97,7 +80,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
         onClick={handleCardClick}
         style={{ cursor: isLocked ? 'default' : 'pointer' }}
       >
-        <div className={`postal-card relative overflow-hidden rounded-sm h-full transition-all duration-700 ${
+        <div className={`relative overflow-hidden rounded-sm h-full transition-all duration-700 ${
           featured ? 'flex flex-col md:flex-row' : ''
         } ${
           isLocked
@@ -109,28 +92,19 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
           style={isLocked ? { animation: 'premiumBreathe 6s ease-in-out infinite' } : undefined}
         >
           {/* Hover glow */}
-          <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none z-0 rounded-sm ${
-            isUnlockedPremium ? 'from-soda-red/6' : 'from-soda-red/3'
+          <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0 rounded-sm ${
+            isUnlockedPremium ? 'from-soda-red/10' : 'from-soda-red/5'
           }`} />
-
-          {/* Airmail stamp corner — postal detail */}
-          {!isLocked && !featured && (
-            <div className="absolute top-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-              <div className="w-6 h-6 border border-soda-red/15 rounded-sm flex items-center justify-center" style={{ borderStyle: 'dashed' }}>
-                <div className="w-2 h-2 rounded-full bg-soda-red/20" />
-              </div>
-            </div>
-          )}
 
           {/* Premium red line at bottom */}
           {isUnlockedPremium && (
             <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-soda-red/40 to-transparent z-10" />
           )}
 
-          {/* Image with parallax */}
+          {/* Image */}
           <div className={`relative overflow-hidden bg-soda-deep ${featured ? 'md:w-3/5 aspect-[16/10] md:aspect-auto' : 'aspect-[16/10]'}`}>
             <img src={episode.imageUrl} alt={episode.city}
-              className="absolute inset-[-8%] w-[116%] h-[116%] object-cover transition-transform duration-[3s] ease-out group-hover:scale-[1.015] parallax-img"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[3s] ease-out group-hover:scale-[1.02]"
               loading="lazy"
               style={isLocked ? { filter: 'saturate(0.2) brightness(0.4) blur(2px)' } : isUnlockedPremium ? { filter: 'contrast(1.1) saturate(1.15) brightness(1.05)' } : {}} />
 

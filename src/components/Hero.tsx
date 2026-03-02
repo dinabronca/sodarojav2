@@ -1,31 +1,45 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { getContent } from '../data/content';
 
 export const Hero: React.FC = () => {
   const content = getContent();
   const { hero, brand } = content;
   const heroLogo = brand?.heroLogoUrl;
-  const { scrollY } = useScroll();
-  const bgY = useTransform(scrollY, [0, 800], [0, 150]);
-  const contentY = useTransform(scrollY, [0, 600], [0, -60]);
-  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Parallax background */}
-      <motion.div className="absolute inset-0 bg-gradient-to-b from-soda-deep via-soda-night to-soda-night" style={{ y: bgY }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-soda-deep via-soda-night to-soda-night" />
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-soda-night to-transparent pointer-events-none z-[5]" />
 
       {/* Subtle ambient glow */}
       <motion.div
         className="absolute pointer-events-none"
-        style={{ width: '60%', height: '60%', left: '20%', top: '20%', background: 'radial-gradient(ellipse, rgba(196,85,85,0.04) 0%, transparent 70%)', filter: 'blur(60px)', y: bgY }}
+        style={{ width: '60%', height: '60%', left: '20%', top: '20%', background: 'radial-gradient(ellipse, rgba(196,85,85,0.04) 0%, transparent 70%)', filter: 'blur(60px)' }}
         animate={{ opacity: [0.3, 0.5, 0.3], scale: [0.97, 1.03, 0.97] }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      <motion.div className="relative z-10 text-center px-6 max-w-6xl mx-auto flex flex-col items-center justify-center" style={{ y: contentY, opacity }}>
+      {/* Floating particles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
+        {[...Array(18)].map((_, i) => (
+          <motion.div
+            key={`hp-${i}`}
+            className="absolute rounded-full"
+            style={{
+              left: `${5 + (i * 5.3) % 90}%`,
+              top: `${8 + (i * 7.7) % 85}%`,
+              width: 2 + (i % 3),
+              height: 2 + (i % 3),
+              background: i % 3 === 0 ? 'rgba(196,85,85,0.4)' : i % 3 === 1 ? 'rgba(138,155,196,0.3)' : 'rgba(212,197,176,0.25)',
+            }}
+            animate={{ y: [0, -40 - (i % 4) * 10, 0], opacity: [0.1, 0.6, 0.1] }}
+            transition={{ duration: 6 + (i % 5) * 2, repeat: Infinity, delay: i * 0.4, ease: 'easeInOut' }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-10 text-center px-6 max-w-6xl mx-auto flex flex-col items-center justify-center">
 
         {/* Brand logotipo or hero image or SVG fallback */}
         {hero.imageUrl ? (
@@ -126,7 +140,7 @@ export const Hero: React.FC = () => {
             {hero.description}
           </motion.p>
         )}
-      </motion.div>
+      </div>
 
       {/* Scroll indicator */}
       <motion.div
