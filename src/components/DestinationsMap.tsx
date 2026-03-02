@@ -43,10 +43,8 @@ export const DestinationsMap: React.FC = () => {
       {/* Particles */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[...Array(8)].map((_, i) => (
-          <motion.div key={`mp-${i}`} className="absolute rounded-full"
-            style={{ left: `${10 + (i * 12) % 80}%`, top: `${15 + (i * 11) % 70}%`, width: 2, height: 2, background: 'rgba(196,85,85,0.3)' }}
-            animate={{ y: [0, -30, 0], opacity: [0.1, 0.4, 0.1] }}
-            transition={{ duration: 8 + i * 2, repeat: Infinity, delay: i * 0.8 }}
+          <div key={`mp-${i}`} className="absolute rounded-full animate-float"
+            style={{ left: `${10 + (i * 12) % 80}%`, top: `${15 + (i * 11) % 70}%`, width: 2, height: 2, background: 'rgba(196,85,85,0.4)', animationDuration: `${8 + i * 2}s`, animationDelay: `${i * 0.8}s` }}
           />
         ))}
       </div>

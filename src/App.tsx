@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { Navbar } from './components/Navbar';
 import { ScrollToTop } from './components/ScrollToTop';
@@ -179,31 +179,13 @@ const Footer: React.FC = () => {
   );
 };
 
-// ===== PAGE TRANSITION WRAPPER =====
-const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const location = useLocation();
-  return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={location.pathname}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3, ease: 'easeInOut' }}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
-  );
-};
-
 // ===== SCROLL PROGRESS BAR =====
 const ScrollProgress: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-[2px] bg-soda-red/50 origin-left z-[9999]"
+      className="fixed top-0 left-0 right-0 h-[2px] bg-soda-red/50 origin-left z-[10000]"
       style={{ scaleX }}
     />
   );
@@ -216,20 +198,18 @@ function AppContent() {
       <ScrollProgress />
       <div className="vhs-global-band" />
       <Navbar />
-      <PageTransition>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/que-es-esto" element={<QueEsEstoPage />} />
-          <Route path="/equipo" element={<EquipoPage />} />
-          <Route path="/episodios" element={<EpisodiosPage />} />
-          <Route path="/frecuencia-interna" element={<FrecuenciaInternaPage />} />
-          <Route path="/shop" element={<ShopPage />} />
-          <Route path="/contacto" element={<ContactoPage />} />
-          <Route path="/mi-cuenta" element={<MiCuentaPage />} />
-          <Route path="/admin" element={<React.Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="loader" /></div>}><AdminPage /></React.Suspense>} />
-          <Route path="/unirse" element={<UnirsePage />} />
-        </Routes>
-      </PageTransition>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/que-es-esto" element={<QueEsEstoPage />} />
+        <Route path="/equipo" element={<EquipoPage />} />
+        <Route path="/episodios" element={<EpisodiosPage />} />
+        <Route path="/frecuencia-interna" element={<FrecuenciaInternaPage />} />
+        <Route path="/shop" element={<ShopPage />} />
+        <Route path="/contacto" element={<ContactoPage />} />
+        <Route path="/mi-cuenta" element={<MiCuentaPage />} />
+        <Route path="/admin" element={<React.Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="loader" /></div>}><AdminPage /></React.Suspense>} />
+        <Route path="/unirse" element={<UnirsePage />} />
+      </Routes>
       <Footer />
     </div>
   );
