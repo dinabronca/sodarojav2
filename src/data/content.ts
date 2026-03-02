@@ -90,6 +90,8 @@ export interface SiteContent {
     items: {
       id: string;
       city: string;
+      country?: string;
+      durationMin?: number;
       title: string;
       description: string;
       imageUrl: string;
