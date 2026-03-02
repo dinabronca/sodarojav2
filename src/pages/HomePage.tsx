@@ -39,11 +39,16 @@ export const HomePage: React.FC = () => {
           <div className="absolute" style={{ left: '-5%', bottom: '10%', width: '50%', height: '50%', background: 'radial-gradient(ellipse, rgba(196,85,85,0.03) 0%, transparent 60%)', filter: 'blur(50px)' }} />
           <div className="absolute" style={{ right: '-5%', top: '20%', width: '40%', height: '40%', background: 'radial-gradient(ellipse, rgba(138,155,196,0.03) 0%, transparent 60%)', filter: 'blur(50px)' }} />
         </div>
-        {/* Floating particles — CSS for perf */}
+        {/* Floating particles */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
-          {[...Array(16)].map((_, i) => (
+          {[
+            { x: 7, y: 15 }, { x: 88, y: 8 }, { x: 32, y: 42 }, { x: 65, y: 28 },
+            { x: 15, y: 72 }, { x: 78, y: 58 }, { x: 48, y: 85 }, { x: 92, y: 40 },
+            { x: 25, y: 55 }, { x: 55, y: 18 }, { x: 72, y: 75 }, { x: 40, y: 65 },
+            { x: 85, y: 90 }, { x: 10, y: 35 }, { x: 60, y: 48 }, { x: 35, y: 90 },
+          ].map((pos, i) => (
             <div key={`ep-${i}`} className="absolute rounded-full animate-float"
-              style={{ left: `${2 + (i * 6.2) % 96}%`, top: `${3 + (i * 7.1) % 94}%`, width: 2 + (i % 3), height: 2 + (i % 3), background: i % 2 === 0 ? 'rgba(196,85,85,0.5)' : 'rgba(138,155,196,0.35)', animationDuration: `${7 + (i % 4) * 2}s`, animationDelay: `${i * 0.5}s` }}
+              style={{ left: `${pos.x}%`, top: `${pos.y}%`, width: 2 + (i % 3), height: 2 + (i % 3), background: i % 2 === 0 ? 'rgba(196,85,85,0.45)' : 'rgba(138,155,196,0.3)', animationDuration: `${7 + (i % 5) * 1.5}s`, animationDelay: `${i * 0.6}s` }}
             />
           ))}
         </div>

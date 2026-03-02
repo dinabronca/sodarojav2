@@ -127,6 +127,7 @@ export const AdminPage: React.FC = () => {
                 <div><label className={lc}>Subtítulo</label><input type="text" value={content.hero.subtitle} onChange={(e) => update('hero.subtitle', e.target.value)} className={ic} /></div>
                 <div><label className={lc}>Descripción</label><textarea rows={3} value={content.hero.description} onChange={(e) => update('hero.description', e.target.value)} className={ic + ' resize-y'} /></div>
                 <div><label className={lc}>URL de imagen principal (opcional, reemplaza la animación)</label><input type="text" value={content.hero.imageUrl} onChange={(e) => update('hero.imageUrl', e.target.value)} className={ic} placeholder="https://..." /><p className={nc}>Dejá vacío para usar la animación del dial de frecuencia</p></div>
+                <div><label className={lc}>URL de video hero (MP4, reemplaza imagen y logo — formato 21:9 ideal)</label><input type="text" value={(content.hero as any).videoUrl || ''} onChange={(e) => update('hero.videoUrl', e.target.value)} className={ic} placeholder="https://...video.mp4" /><p className={nc}>El video se reproduce en loop, silenciado, sin controles. Dejá vacío para usar imagen/logo</p></div>
               </div>
             </div>
           </div>

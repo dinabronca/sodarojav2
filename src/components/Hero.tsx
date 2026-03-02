@@ -20,20 +20,27 @@ export const Hero: React.FC = () => {
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      {/* Floating particles — CSS animated for performance */}
+      {/* Floating particles — organic distribution */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 2 }}>
-        {[...Array(24)].map((_, i) => {
-          const size = 2 + (i % 4);
-          const colors = ['rgba(196,85,85,0.55)', 'rgba(138,155,196,0.4)', 'rgba(212,197,176,0.3)'];
+        {[
+          { x: 4, y: 12 }, { x: 92, y: 8 }, { x: 23, y: 45 }, { x: 67, y: 22 },
+          { x: 45, y: 78 }, { x: 81, y: 55 }, { x: 12, y: 67 }, { x: 56, y: 38 },
+          { x: 35, y: 15 }, { x: 78, y: 82 }, { x: 8, y: 88 }, { x: 88, y: 35 },
+          { x: 50, y: 60 }, { x: 18, y: 30 }, { x: 72, y: 70 }, { x: 38, y: 92 },
+          { x: 62, y: 5 }, { x: 95, y: 65 }, { x: 28, y: 55 }, { x: 85, y: 15 },
+          { x: 15, y: 48 }, { x: 55, y: 85 }, { x: 42, y: 25 }, { x: 75, y: 48 },
+        ].map((pos, i) => {
+          const size = [2, 2, 3, 2, 3, 2, 4, 2, 3, 2, 2, 3, 2, 3, 2, 4, 2, 3, 2, 2, 3, 2, 3, 2][i];
+          const colors = ['rgba(196,85,85,0.5)', 'rgba(138,155,196,0.35)', 'rgba(212,197,176,0.25)'];
+          const durations = [7, 9, 8, 11, 10, 7, 12, 8, 9, 10, 11, 7, 8, 12, 9, 10, 7, 11, 8, 9, 10, 12, 7, 8];
           return (
             <div key={`hp-${i}`} className="absolute rounded-full animate-float"
               style={{
-                left: `${3 + (i * 4.1) % 94}%`,
-                top: `${5 + (i * 6.3) % 90}%`,
+                left: `${pos.x}%`, top: `${pos.y}%`,
                 width: size, height: size,
                 background: colors[i % 3],
-                animationDuration: `${6 + (i % 5) * 2}s`,
-                animationDelay: `${i * 0.3}s`,
+                animationDuration: `${durations[i]}s`,
+                animationDelay: `${i * 0.4}s`,
               }}
             />
           );
@@ -42,21 +49,39 @@ export const Hero: React.FC = () => {
 
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto flex flex-col items-center justify-center">
 
-        {/* Brand logotipo or hero image or SVG fallback */}
-        {hero.imageUrl ? (
+        {/* Hero video (if set in admin) — replaces image/logo */}
+        {(hero as any).videoUrl ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5 }}
+            className="relative w-full max-w-4xl mx-auto mb-10 overflow-hidden rounded-sm"
+            style={{ aspectRatio: '21/9' }}
+          >
+            <video
+              src={(hero as any).videoUrl}
+              autoPlay loop muted playsInline
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+              style={{ userSelect: 'none' }}
+              onContextMenu={(e) => e.preventDefault()}
+            />
+            {/* Subtle vignette overlay */}
+            <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 80px rgba(10,14,26,0.6)' }} />
+          </motion.div>
+        ) : hero.imageUrl ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: 'easeOut' }}
-            className="relative inline-block mb-10 max-w-md mx-auto"
+            className="relative inline-block mb-10 max-w-sm mx-auto"
           >
             <motion.div
-              className="absolute -inset-6 rounded-sm"
-              style={{ background: 'radial-gradient(ellipse, rgba(196,85,85,0.08) 0%, transparent 70%)' }}
+              className="absolute -inset-10 rounded-full"
+              style={{ background: 'radial-gradient(ellipse, rgba(196,85,85,0.06) 0%, transparent 65%)' }}
               animate={{ opacity: [0.3, 0.6, 0.3] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
             />
-            <img src={hero.imageUrl} alt={hero.title || 'sodaroja'} className="relative z-10 w-full rounded-sm" style={{ mixBlendMode: 'lighten', filter: 'brightness(0.95) contrast(1.05)' }} />
+            <img src={hero.imageUrl} alt={hero.title || 'sodaroja'} className="relative z-10 w-full" style={{ mixBlendMode: 'screen' }} />
           </motion.div>
         ) : heroLogo ? (
           /* Logotipo brand — the main brand display */
@@ -72,7 +97,7 @@ export const Hero: React.FC = () => {
               animate={{ opacity: [0.2, 0.5, 0.2] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
             />
-            <img src={heroLogo} alt="sodaroja" className="relative z-10 h-20 sm:h-28 md:h-36 mx-auto object-contain" style={{ mixBlendMode: 'lighten', filter: 'brightness(1.1)' }} />
+            <img src={heroLogo} alt="sodaroja" className="relative z-10 h-20 sm:h-28 md:h-36 mx-auto object-contain" style={{ mixBlendMode: 'screen' }} />
           </motion.div>
         ) : (
           /* Fallback: SVG carita */

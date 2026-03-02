@@ -52,5 +52,17 @@ export const MailEffects: React.FC = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
     <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 30% 60%, rgba(138, 155, 196, 0.04) 0%, transparent 50%)' }} />
     <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 70% 30%, rgba(196, 85, 85, 0.03) 0%, transparent 50%)' }} />
+    {/* Falling envelopes */}
+    {[
+      { x: 8, d: 14, del: 0 }, { x: 22, d: 18, del: 3 }, { x: 38, d: 16, del: 7 },
+      { x: 52, d: 20, del: 2 }, { x: 68, d: 15, del: 5 }, { x: 82, d: 17, del: 9 },
+      { x: 95, d: 19, del: 1 }, { x: 15, d: 21, del: 6 }, { x: 45, d: 13, del: 4 },
+      { x: 75, d: 16, del: 8 }, { x: 30, d: 22, del: 10 }, { x: 60, d: 14, del: 11 },
+    ].map((e, i) => (
+      <div key={`env-${i}`} className="absolute envelope-fall"
+        style={{ left: `${e.x}%`, top: '-5%', fontSize: `${12 + (i % 3) * 3}px`, opacity: 0.12 + (i % 4) * 0.03, animationDuration: `${e.d}s`, animationDelay: `${e.del}s` }}>
+        ✉
+      </div>
+    ))}
   </div>
 );

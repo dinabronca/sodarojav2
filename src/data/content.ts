@@ -41,7 +41,8 @@ export interface SiteContent {
     title: string;
     subtitle: string;
     description: string;
-    imageUrl: string; // URL de imagen principal (reemplaza el SVG)
+    imageUrl: string;
+    videoUrl?: string; // MP4 video URL for hero (replaces image/logo)
   };
 
   // QUÉ ES ESTO

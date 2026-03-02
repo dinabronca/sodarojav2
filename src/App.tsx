@@ -54,13 +54,11 @@ const AirportCounter: React.FC = () => {
   );
 
   return (
-    <div className="flex items-start justify-center gap-6 sm:gap-8">
-      {renderFlap('ciudades', String(cities).padStart(2, '0'), 0.2)}
+    <div className="flex items-start justify-center gap-5 sm:gap-7">
+      {renderFlap('países', String(countries || '—').padStart(2, '0'), 0.2)}
       <span className="text-soda-lamp/20 text-lg mt-0.5">·</span>
-      {countries > 0 && (<>
-        {renderFlap('países', String(countries).padStart(2, '0'), 0.4)}
-        <span className="text-soda-lamp/20 text-lg mt-0.5">·</span>
-      </>)}
+      {renderFlap('ciudades', String(cities).padStart(2, '0'), 0.4)}
+      <span className="text-soda-lamp/20 text-lg mt-0.5">·</span>
       {renderFlap('episodios', String(eps).padStart(2, '0'), 0.6)}
       <span className="text-soda-lamp/20 text-lg mt-0.5">·</span>
       {renderFlap('horas', String(hours).padStart(2, '0'), 0.8)}

@@ -75,7 +75,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        whileHover={!isLocked ? { y: -3, transition: { duration: 0.8, ease: 'easeOut' } } : undefined}
+        whileHover={!isLocked ? { y: -2, transition: { duration: 1.2, ease: 'easeOut' } } : undefined}
         className="relative group h-full"
         onClick={handleCardClick}
         style={{ cursor: isLocked ? 'default' : 'pointer' }}
@@ -104,7 +104,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
           {/* Image */}
           <div className={`relative overflow-hidden bg-soda-deep ${featured ? 'md:w-3/5 aspect-[16/10] md:aspect-auto' : 'aspect-[16/10]'}`}>
             <img src={episode.imageUrl} alt={episode.city}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[3s] ease-out group-hover:scale-[1.02]"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[3s] ease-out group-hover:scale-[1.008]"
               loading="lazy"
               style={isLocked ? { filter: 'saturate(0.2) brightness(0.4) blur(2px)' } : isUnlockedPremium ? { filter: 'contrast(1.1) saturate(1.15) brightness(1.05)' } : {}} />
 
