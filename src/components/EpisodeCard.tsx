@@ -43,6 +43,23 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
     } catch {}
   };
 
+  // Parallax for card images
+  React.useEffect(() => {
+    if (isMobile) return;
+    const container = document.querySelector(`[data-ep-id="${episode.id}"]`);
+    const img = container?.querySelector('.parallax-img') as HTMLElement;
+    if (!img) return;
+    const handleScroll = () => {
+      const rect = container!.getBoundingClientRect();
+      const center = rect.top + rect.height / 2;
+      const offset = (center - window.innerHeight / 2) / window.innerHeight;
+      img.style.transform = `translateY(${offset * -12}px)`;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [episode.id, isMobile]);
+
   useEffect(() => {
     if (isExpanded) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = '';
@@ -70,6 +87,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
     <>
       {/* === CARD: Classic style — image top, info below === */}
       <motion.div
+        data-ep-id={episode.id}
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -109,10 +127,10 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
             <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-soda-red/40 to-transparent z-10" />
           )}
 
-          {/* Image */}
+          {/* Image with parallax */}
           <div className={`relative overflow-hidden bg-soda-deep ${featured ? 'md:w-3/5 aspect-[16/10] md:aspect-auto' : 'aspect-[16/10]'}`}>
             <img src={episode.imageUrl} alt={episode.city}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[3s] ease-out group-hover:scale-[1.015]"
+              className="absolute inset-[-8%] w-[116%] h-[116%] object-cover transition-transform duration-[3s] ease-out group-hover:scale-[1.015] parallax-img"
               loading="lazy"
               style={isLocked ? { filter: 'saturate(0.2) brightness(0.4) blur(2px)' } : isUnlockedPremium ? { filter: 'contrast(1.1) saturate(1.15) brightness(1.05)' } : {}} />
 
@@ -188,7 +206,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
                 {episode.city}
               </span>
               {formattedDate && !isLocked && (
-                <span className="text-soda-fog/30 text-[10px] tracking-wider">{formattedDate}</span>
+                <span className="text-soda-lamp/40 text-[10px] tracking-wider">{formattedDate}</span>
               )}
             </div>
 
@@ -198,7 +216,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
             </h3>
 
             {/* Description */}
-            <p className={`text-soda-fog/60 font-light leading-relaxed mb-5 ${featured ? 'text-sm line-clamp-4' : 'text-[13px] line-clamp-2'}`}>
+            <p className={`text-soda-lamp/55 font-light leading-relaxed mb-5 ${featured ? 'text-sm line-clamp-4' : 'text-[13px] line-clamp-2'}`}>
               {episode.description}
             </p>
 
@@ -208,7 +226,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
                 Desbloquear <ChevronRight size={11} className="group-hover/cta:translate-x-1 transition-transform duration-500" />
               </Link>
             ) : (
-              <span className="inline-flex items-center gap-2 text-soda-fog/40 text-[10px] tracking-[0.15em] uppercase group-hover:text-soda-lamp/60 transition-colors duration-700">
+              <span className="inline-flex items-center gap-2 text-soda-lamp/45 text-[10px] tracking-[0.15em] uppercase group-hover:text-soda-lamp/80 transition-colors duration-700">
                 Escuchar <ChevronRight size={11} className="group-hover:translate-x-1 transition-transform duration-500" />
               </span>
             )}

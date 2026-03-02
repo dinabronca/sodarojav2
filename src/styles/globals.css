@@ -81,8 +81,8 @@ body::before {
       0deg,
       transparent,
       transparent 3px,
-      rgba(0, 0, 0, 0.01) 3px,
-      rgba(0, 0, 0, 0.01) 4px
+      rgba(0, 0, 0, 0.025) 3px,
+      rgba(0, 0, 0, 0.025) 4px
     );
 }
 
@@ -163,6 +163,19 @@ body::before {
 .audio-bar:nth-child(2) { animation-delay: 0.1s; }
 .audio-bar:nth-child(3) { animation-delay: 0.2s; }
 .audio-bar:nth-child(4) { animation-delay: 0.3s; }
+
+/* ===== CITY MARQUEE ===== */
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+.marquee-content {
+  animation: marqueeScroll 60s linear infinite;
+}
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 767px) {

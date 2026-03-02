@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { Navbar } from './components/Navbar';
 import { ScrollToTop } from './components/ScrollToTop';
 import { HomePage } from './pages/HomePage';
@@ -20,37 +20,10 @@ import './styles/globals.css';
 const AdminPage = React.lazy(() => import('./pages/AdminPage').then(m => ({ default: m.AdminPage })));
 initDemoUsers();
 
-// ===== CURSOR GLOW =====
-const CursorGlow: React.FC = () => {
-  const ref = React.useRef<HTMLDivElement>(null);
-  React.useEffect(() => {
-    if ('ontouchstart' in window || window.innerWidth < 768) return;
-    let x = -500, y = -500;
-    const move = (e: MouseEvent) => { x = e.clientX; y = e.clientY; };
-    const raf = () => {
-      if (ref.current) {
-        ref.current.style.transform = `translate3d(${x - 250}px, ${y - 250}px, 0)`;
-      }
-      requestAnimationFrame(raf);
-    };
-    window.addEventListener('mousemove', move, { passive: true });
-    requestAnimationFrame(raf);
-    return () => window.removeEventListener('mousemove', move);
-  }, []);
-  return (
-    <div ref={ref} className="fixed pointer-events-none z-[9990] hidden md:block will-change-transform" style={{
-      width: 500, height: 500,
-      background: 'radial-gradient(circle, rgba(196,85,85,0.035) 0%, rgba(196,85,85,0.01) 30%, transparent 60%)',
-      filter: 'blur(30px)',
-    }} />
-  );
-};
-
 // ===== AIRPORT COUNTER — split-flap style =====
 const AirportDigit: React.FC<{ char: string; delay: number }> = ({ char, delay }) => (
   <motion.span
-    className="inline-block font-mono text-soda-glow/70 text-[11px] sm:text-[13px] tracking-[0.05em] bg-soda-night/80 border border-soda-mist/8 px-[5px] py-[2px] rounded-[2px] min-w-[10px] text-center"
-    style={{ textShadow: '0 0 8px rgba(212,197,176,0.15)' }}
+    className="inline-block font-mono text-soda-glow text-[12px] sm:text-[14px] tracking-[0.05em] bg-soda-slate/60 border border-soda-mist/15 px-[6px] py-[3px] rounded-[2px] min-w-[12px] text-center"
     initial={{ opacity: 0, rotateX: -90 }}
     whileInView={{ opacity: 1, rotateX: 0 }}
     viewport={{ once: true }}
@@ -62,9 +35,12 @@ const AirportDigit: React.FC<{ char: string; delay: number }> = ({ char, delay }
 
 const AirportCounter: React.FC = () => {
   const content = getContent();
-  const eps = content.episodios?.items?.length || demoEpisodes.length;
-  const cities = new Set((content.episodios?.items || demoEpisodes).map((e: any) => e.city)).size;
-  const hours = Math.round(eps * 0.8); // approx
+  const episodes = content.episodios?.items?.length ? content.episodios.items : demoEpisodes;
+  const eps = episodes.length;
+  const cities = new Set(episodes.map((e: any) => e.city)).size;
+  const countries = new Set(episodes.map((e: any) => (e as any).country).filter(Boolean)).size;
+  const totalMin = episodes.reduce((sum: number, e: any) => sum + ((e as any).durationMin || 45), 0);
+  const hours = Math.round(totalMin / 60);
 
   const renderFlap = (label: string, value: string, baseDelay: number) => (
     <div className="flex flex-col items-center gap-1.5">
@@ -73,16 +49,20 @@ const AirportCounter: React.FC = () => {
           <AirportDigit key={i} char={c} delay={baseDelay + i * 0.08} />
         ))}
       </div>
-      <span className="text-soda-fog/15 text-[7px] sm:text-[8px] tracking-[0.3em] uppercase">{label}</span>
+      <span className="text-soda-lamp/30 text-[7px] sm:text-[8px] tracking-[0.3em] uppercase">{label}</span>
     </div>
   );
 
   return (
     <div className="flex items-start justify-center gap-6 sm:gap-8">
       {renderFlap('ciudades', String(cities).padStart(2, '0'), 0.2)}
-      <span className="text-soda-fog/10 text-lg mt-0.5">·</span>
-      {renderFlap('episodios', String(eps).padStart(2, '0'), 0.5)}
-      <span className="text-soda-fog/10 text-lg mt-0.5">·</span>
+      <span className="text-soda-lamp/20 text-lg mt-0.5">·</span>
+      {countries > 0 && (<>
+        {renderFlap('países', String(countries).padStart(2, '0'), 0.4)}
+        <span className="text-soda-lamp/20 text-lg mt-0.5">·</span>
+      </>)}
+      {renderFlap('episodios', String(eps).padStart(2, '0'), 0.6)}
+      <span className="text-soda-lamp/20 text-lg mt-0.5">·</span>
       {renderFlap('horas', String(hours).padStart(2, '0'), 0.8)}
     </div>
   );
@@ -169,8 +149,8 @@ const Footer: React.FC = () => {
               <img src={content.brand.isotipoUrl} alt="" className="h-5 w-5 object-contain opacity-30" />
             ) : null}
             <div>
-              <span className="font-serif text-soda-glow/50 text-sm block leading-tight">sodaroja</span>
-              <span className="text-soda-fog/15 text-[8px] tracking-[0.12em] block mt-0.5">Un podcast que viaja</span>
+              <span className="font-serif text-soda-glow/70 text-sm block leading-tight">sodaroja</span>
+              <span className="text-soda-lamp/25 text-[8px] tracking-[0.12em] block mt-0.5">Un podcast que viaja</span>
             </div>
           </div>
 
@@ -183,7 +163,7 @@ const Footer: React.FC = () => {
           <div className="flex items-center gap-5 flex-wrap justify-center sm:justify-end">
             {visibleLinks.map((link: any) => (
               <a key={link.id} href={link.url} target="_blank" rel="noopener noreferrer"
-                className="text-soda-fog/20 text-[10px] tracking-[0.1em] uppercase hover:text-soda-fog/45 transition-colors duration-700">
+                className="text-soda-lamp/30 text-[10px] tracking-[0.1em] uppercase hover:text-soda-lamp/60 transition-colors duration-700">
                 {link.abbr || link.platform}
               </a>
             ))}
@@ -217,11 +197,23 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) =
   );
 };
 
+// ===== SCROLL PROGRESS BAR =====
+const ScrollProgress: React.FC = () => {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  return (
+    <motion.div
+      className="fixed top-0 left-0 right-0 h-[2px] bg-soda-red/50 origin-left z-[9999]"
+      style={{ scaleX }}
+    />
+  );
+};
+
 // ===== APP =====
 function AppContent() {
   return (
     <div className="relative min-h-screen bg-soda-night overflow-x-hidden">
-      <CursorGlow />
+      <ScrollProgress />
       <div className="vhs-global-band" />
       <Navbar />
       <PageTransition>
