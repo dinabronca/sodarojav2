@@ -112,7 +112,7 @@ export const HomePage: React.FC = () => {
       <section className="relative py-20 sm:py-28 px-6 overflow-hidden">
         <div className="max-w-5xl mx-auto relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <p className="text-soda-lamp/50 text-[9px] tracking-[0.4em] uppercase text-center mb-14">Lo que dicen los oyentes</p>
+            <p className="text-soda-lamp/30 text-[9px] tracking-[0.4em] uppercase text-center mb-14">Lo que dicen los oyentes</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -121,15 +121,15 @@ export const HomePage: React.FC = () => {
               { quote: 'Lo descubrí por casualidad y ahora no puedo parar. Cada ciudad es un mundo nuevo.', author: 'Valentina S.', from: 'Montevideo' },
             ].map((t, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}
-                className="relative p-8 border border-soda-mist/14 rounded-sm group hover:border-soda-mist/25 transition-all duration-700"
+                className="relative p-8 border border-soda-mist/10 rounded-sm group hover:border-soda-mist/20 transition-all duration-700"
               >
-                <span className="absolute -top-3 left-6 text-soda-red/35 text-6xl font-serif leading-none select-none">&ldquo;</span>
-                <p className="text-soda-lamp/80 text-sm font-light leading-relaxed mb-6 relative z-10">{t.quote}</p>
+                <span className="absolute -top-3 left-6 text-soda-red/20 text-6xl font-serif leading-none select-none">&ldquo;</span>
+                <p className="text-soda-lamp/60 text-sm font-light leading-relaxed mb-6 relative z-10">{t.quote}</p>
                 <div className="flex items-center gap-2">
                   <div className="w-6 h-px bg-soda-red/40" />
-                  <span className="text-soda-lamp/75 text-[10px] tracking-wider">{t.author}</span>
+                  <span className="text-soda-lamp/60 text-[10px] tracking-wider">{t.author}</span>
                   <span className="text-soda-lamp/30 text-[10px]">·</span>
-                  <span className="text-soda-lamp/55 text-[10px]">{t.from}</span>
+                  <span className="text-soda-lamp/35 text-[10px]">{t.from}</span>
                 </div>
               </motion.div>
             ))}

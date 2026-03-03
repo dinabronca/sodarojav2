@@ -123,7 +123,7 @@ export const QueEsEsto: React.FC = () => {
           transition={{ duration: 1 }}
           className="relative max-w-3xl mx-auto text-center mb-20 sm:mb-28 px-4"
         >
-          <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-soda-red/25 text-[120px] sm:text-[180px] font-serif leading-none select-none pointer-events-none" style={{ fontFamily: 'Georgia, serif' }}>&ldquo;</span>
+          <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-soda-red/10 text-[120px] sm:text-[180px] font-serif leading-none select-none pointer-events-none" style={{ fontFamily: 'Georgia, serif' }}>&ldquo;</span>
           <p className="relative z-10 text-2xl sm:text-3xl md:text-4xl font-serif text-soda-glow/80 leading-[1.3] italic">
             Cada ciudad tiene una historia que nadie cuenta. Nosotros la encontramos.
           </p>

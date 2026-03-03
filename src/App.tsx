@@ -49,18 +49,18 @@ const AirportCounter: React.FC = () => {
           <AirportDigit key={i} char={c} delay={baseDelay + i * 0.08} />
         ))}
       </div>
-      <span className="text-soda-lamp/30 text-[7px] sm:text-[8px] tracking-[0.3em] uppercase">{label}</span>
+      <span className="text-soda-lamp/40 text-[7px] sm:text-[8px] tracking-[0.3em] uppercase">{label}</span>
     </div>
   );
 
   return (
     <div className="flex items-start justify-center gap-5 sm:gap-7">
       {renderFlap('países', String(countries || '—').padStart(2, '0'), 0.2)}
-      <span className="text-soda-lamp/20 text-lg mt-0.5">·</span>
+      <span className="text-soda-lamp/30 text-lg mt-0.5">·</span>
       {renderFlap('ciudades', String(cities).padStart(2, '0'), 0.4)}
-      <span className="text-soda-lamp/20 text-lg mt-0.5">·</span>
+      <span className="text-soda-lamp/30 text-lg mt-0.5">·</span>
       {renderFlap('episodios', String(eps).padStart(2, '0'), 0.6)}
-      <span className="text-soda-lamp/20 text-lg mt-0.5">·</span>
+      <span className="text-soda-lamp/30 text-lg mt-0.5">·</span>
       {renderFlap('horas', String(hours).padStart(2, '0'), 0.8)}
     </div>
   );
@@ -129,7 +129,7 @@ const Footer: React.FC = () => {
             <div className="flex items-center justify-center gap-6 sm:gap-10 flex-wrap">
               {sponsors.map((s: any) => (
                 <a key={s.id} href={s.url} target="_blank" rel="noopener noreferrer" title={s.name}
-                  className="opacity-12 hover:opacity-35 transition-opacity duration-700">
+                  className="opacity-15 hover:opacity-40 transition-opacity duration-700">
                   <img src={s.logoUrl} alt={s.name} className="h-4 sm:h-[18px] object-contain" style={{ filter: 'brightness(3) grayscale(1)' }} loading="lazy" />
                 </a>
               ))}
@@ -183,7 +183,7 @@ const ScrollProgress: React.FC = () => {
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-[2px] bg-soda-red/50 origin-left z-[10000]"
+      className="fixed top-0 left-0 right-0 h-[2px] bg-soda-red/60 origin-left z-[10000]"
       style={{ scaleX }}
     />
   );

@@ -266,8 +266,8 @@ export const ElEquipo: React.FC = () => {
                     src={member.photoUrl}
                     alt={member.name}
                     className="w-full h-full object-cover object-center"
-                    whileHover={{ scale: 1.004, transition: { duration: 1.5, ease: 'easeOut' } }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    whileHover={{ scale: 1.01, transition: { duration: 0.8, ease: 'easeOut' } }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-soda-night via-transparent to-transparent opacity-60 group-hover:opacity-45 transition-opacity duration-700" />
