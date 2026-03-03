@@ -108,13 +108,11 @@ export interface SiteContent {
         applePodcasts?: string;
       };
       embeds: {
-        youtube?: string;
         spotify?: string;
         soundcloud?: string;
         ivoox?: string;
         applePodcasts?: string;
       };
-      gallery?: string[]; // Up to 5 image URLs
     }[];
   };
 
@@ -171,14 +169,6 @@ export interface SiteContent {
     abbr: string;
     url: string;
     iconUrl?: string;
-    visible: boolean;
-  }[];
-
-  // PLATAFORMAS — "Escuchá en"
-  platforms?: {
-    id: string;
-    name: string;
-    url: string; // Link to sodaroja's profile on this platform
     visible: boolean;
   }[];
 
@@ -438,14 +428,6 @@ export const defaultContent: SiteContent = {
     { id: 'sc', platform: 'SoundCloud', abbr: 'SC', url: '#', visible: true },
     { id: 'tt', platform: 'TikTok', abbr: 'TT', url: '#', visible: true },
     { id: 'ap', platform: 'Apple Podcasts', abbr: 'AP', url: '#', visible: true },
-  ],
-
-  platforms: [
-    { id: 'plt-spotify', name: 'Spotify', url: 'https://open.spotify.com', visible: true },
-    { id: 'plt-apple', name: 'Apple Podcasts', url: 'https://podcasts.apple.com', visible: true },
-    { id: 'plt-youtube', name: 'YouTube', url: 'https://youtube.com', visible: true },
-    { id: 'plt-ivoox', name: 'iVoox', url: 'https://www.ivoox.com', visible: false },
-    { id: 'plt-soundcloud', name: 'SoundCloud', url: 'https://soundcloud.com', visible: false },
   ],
 
   sponsors: [

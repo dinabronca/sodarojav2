@@ -23,7 +23,6 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
   const [isExpanded, setIsExpanded] = useState(false);
   const [listened, setListened] = useState(false);
   const [showListenPrompt, setShowListenPrompt] = useState(false);
-  const [zoomedImg, setZoomedImg] = useState<string | null>(null);
   const formattedDate = formatDate(episode.publishDate);
   const user = getCurrentUser();
   const isPremiumUser = user?.isPremium === true;
@@ -66,7 +65,6 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
 
   const links = episode.links || {};
   const embeds = episode.embeds || {};
-  const gallery: string[] = (episode as any).gallery?.filter(Boolean) || [];
 
   return (
     <>
@@ -212,7 +210,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
 
       {/* === MODAL === */}
       {isExpanded && !isLocked && (
-        <div className="fixed inset-0 z-[10000] flex items-center justify-center p-2 sm:p-4 md:p-8" onClick={() => { setIsExpanded(false); setZoomedImg(null); }}>
+        <div className="fixed inset-0 z-[10000] flex items-center justify-center p-2 sm:p-4 md:p-8" onClick={() => setIsExpanded(false)}>
           <div className="absolute inset-0 bg-soda-night/95 backdrop-blur-sm" />
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -228,6 +226,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
             <div className="relative h-56 sm:h-72 overflow-hidden">
               <img src={episode.imageUrl} alt={episode.city} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-soda-deep via-soda-deep/50 to-transparent" />
+              {/* VHS on premium modal */}
               {isUnlockedPremium && (
                 <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'hidden' }}>
                   <div style={{ position: 'absolute', left: 0, width: '100%', height: '30%', background: 'linear-gradient(transparent, rgba(196,85,85,0.06) 40%, rgba(196,85,85,0.1) 50%, rgba(196,85,85,0.06) 60%, transparent)', animation: 'vhsScan 5s linear infinite' }} />
@@ -239,92 +238,39 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
               {/* Meta row */}
               <div className="flex items-center gap-3 mb-3 flex-wrap">
                 {episodeNumber !== undefined && <span className="text-soda-red/80 text-[10px] font-mono tracking-wider bg-soda-red/10 px-2.5 py-1 rounded-sm">{epNum(episodeNumber)}</span>}
-                <span className={`text-[11px] tracking-wider ${isUnlockedPremium ? 'text-soda-red' : 'text-soda-accent'}`}>{episode.city}{(episode as any).country ? `, ${(episode as any).country}` : ''}</span>
-                {formattedDate && <span className="text-soda-lamp/40 text-[11px]">{formattedDate}</span>}
-                {(episode as any).durationMin && <span className="text-soda-lamp/30 text-[11px]">{(episode as any).durationMin} min</span>}
+                <span className={`text-[11px] tracking-wider ${isUnlockedPremium ? 'text-soda-red' : 'text-soda-accent'}`}>{episode.city}</span>
+                {formattedDate && <span className="text-soda-fog/40 text-[11px]">{formattedDate}</span>}
                 {isUnlockedPremium && <span className="text-soda-red text-[9px] tracking-wider bg-soda-red/10 px-2 py-0.5 rounded-sm">FRECUENCIA INTERNA</span>}
                 {isNewest && <span className="text-soda-glow text-[9px] tracking-wider bg-soda-red/80 px-2 py-0.5 rounded-sm">NUEVO</span>}
               </div>
 
-              <h2 className="text-3xl sm:text-4xl font-serif text-soda-glow mb-2">&ldquo;{episode.title}&rdquo;</h2>
-              <p className="text-soda-lamp/70 text-sm font-light leading-relaxed mb-6">{episode.description}</p>
+              <h2 className="text-3xl sm:text-4xl font-serif text-soda-glow mb-2">"{episode.title}"</h2>
+              <p className="text-soda-lamp text-sm font-light leading-relaxed mb-6">{episode.description}</p>
 
-              {/* === EMBEDS — functional players === */}
-              <div className="space-y-5 mb-6">
-                {/* YouTube embed */}
-                {(embeds as any).youtube && (
-                  <div>
-                    <span className="text-soda-lamp/30 text-[10px] tracking-[0.2em] block mb-2">YOUTUBE</span>
-                    <div className="relative w-full rounded-sm overflow-hidden" style={{ paddingBottom: '56.25%' }}>
-                      <iframe src={(embeds as any).youtube} className="absolute inset-0 w-full h-full" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen loading="lazy" />
-                    </div>
-                  </div>
-                )}
-                {/* Spotify embed */}
-                {embeds.spotify && (
-                  <div>
-                    <span className="text-soda-lamp/30 text-[10px] tracking-[0.2em] block mb-2">SPOTIFY</span>
-                    <iframe src={embeds.spotify} width="100%" height={isMobile ? "152" : "232"} frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style={{ borderRadius: '8px' }} />
-                  </div>
-                )}
-                {/* Apple Podcasts embed */}
-                {embeds.applePodcasts && (
-                  <div>
-                    <span className="text-soda-lamp/30 text-[10px] tracking-[0.2em] block mb-2">APPLE PODCASTS</span>
-                    <iframe src={embeds.applePodcasts} width="100%" height={isMobile ? "150" : "175"} frameBorder="0" allow="autoplay *;" loading="lazy" style={{ borderRadius: '10px' }} />
-                  </div>
-                )}
-                {/* iVoox embed */}
-                {embeds.ivoox && (
-                  <div>
-                    <span className="text-soda-lamp/30 text-[10px] tracking-[0.2em] block mb-2">IVOOX</span>
-                    <iframe src={embeds.ivoox} width="100%" height={isMobile ? "150" : "200"} frameBorder="0" loading="lazy" />
-                  </div>
-                )}
-                {/* SoundCloud embed */}
-                {embeds.soundcloud && (
-                  <div>
-                    <span className="text-soda-lamp/30 text-[10px] tracking-[0.2em] block mb-2">SOUNDCLOUD</span>
-                    <iframe src={embeds.soundcloud} width="100%" height={isMobile ? "120" : "166"} frameBorder="0" allow="autoplay" loading="lazy" />
-                  </div>
-                )}
+              {/* Embeds */}
+              <div className="space-y-4">
+                {embeds.spotify && <div><span className="text-soda-fog/40 text-[10px] tracking-wider block mb-2">SPOTIFY</span><iframe src={embeds.spotify} width="100%" height={isMobile ? "152" : "232"} frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style={{ borderRadius: '8px' }} /></div>}
+                {embeds.soundcloud && <div><span className="text-soda-fog/40 text-[10px] tracking-wider block mb-2">SOUNDCLOUD</span><iframe src={embeds.soundcloud} width="100%" height={isMobile ? "120" : "166"} frameBorder="0" allow="autoplay" loading="lazy" /></div>}
+                {embeds.ivoox && <div><span className="text-soda-fog/40 text-[10px] tracking-wider block mb-2">IVOOX</span><iframe src={embeds.ivoox} width="100%" height={isMobile ? "150" : "200"} frameBorder="0" loading="lazy" /></div>}
+                {embeds.applePodcasts && <div><span className="text-soda-fog/40 text-[10px] tracking-wider block mb-2">APPLE PODCASTS</span><iframe src={embeds.applePodcasts} width="100%" height={isMobile ? "150" : "175"} frameBorder="0" allow="autoplay *;" loading="lazy" /></div>}
               </div>
 
-              {/* === EXTERNAL LINKS — open in platform === */}
-              {Object.values(links).some(v => v) && (
-                <div className="mb-6">
-                  <span className="text-soda-lamp/30 text-[10px] tracking-[0.2em] block mb-3">ESCUCHAR EN</span>
-                  <div className="flex flex-wrap gap-2">
-                    {links.spotify && <a href={links.spotify} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 border border-soda-mist/12 rounded-sm text-soda-lamp/60 text-[11px] tracking-wider hover:border-soda-lamp/25 hover:text-soda-lamp transition-all duration-500"><ExternalLink size={11} />Spotify</a>}
-                    {links.applePodcasts && <a href={links.applePodcasts} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 border border-soda-mist/12 rounded-sm text-soda-lamp/60 text-[11px] tracking-wider hover:border-soda-lamp/25 hover:text-soda-lamp transition-all duration-500"><ExternalLink size={11} />Apple Podcasts</a>}
-                    {links.youtube && <a href={links.youtube} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 border border-soda-mist/12 rounded-sm text-soda-lamp/60 text-[11px] tracking-wider hover:border-soda-lamp/25 hover:text-soda-lamp transition-all duration-500"><ExternalLink size={11} />YouTube</a>}
-                    {links.ivoox && <a href={links.ivoox} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 border border-soda-mist/12 rounded-sm text-soda-lamp/60 text-[11px] tracking-wider hover:border-soda-lamp/25 hover:text-soda-lamp transition-all duration-500"><ExternalLink size={11} />iVoox</a>}
-                    {links.soundcloud && <a href={links.soundcloud} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 border border-soda-mist/12 rounded-sm text-soda-lamp/60 text-[11px] tracking-wider hover:border-soda-lamp/25 hover:text-soda-lamp transition-all duration-500"><ExternalLink size={11} />SoundCloud</a>}
-                  </div>
-                </div>
-              )}
-
-              {/* === GALLERY — episode images === */}
-              {gallery.length > 0 && (
-                <div className="mb-6">
-                  <span className="text-soda-lamp/30 text-[10px] tracking-[0.2em] block mb-3">GALERÍA</span>
-                  <div className="flex gap-2 overflow-x-auto pb-2" style={{ scrollSnapType: 'x mandatory' }}>
-                    {gallery.map((img: string, gi: number) => (
-                      <div key={gi} className="flex-shrink-0 cursor-pointer group/gal" style={{ scrollSnapAlign: 'start' }}
-                        onClick={(e) => { e.stopPropagation(); setZoomedImg(img); }}>
-                        <div className="w-20 h-[106px] sm:w-24 sm:h-32 rounded-sm overflow-hidden border border-soda-mist/10 group-hover/gal:border-soda-mist/25 transition-all duration-500">
-                          <img src={img} alt={`Foto ${gi + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover/gal:scale-[1.03]" loading="lazy" />
-                        </div>
-                      </div>
-                    ))}
+              {/* External links */}
+              {Object.keys(links).length > 0 && (
+                <div className="mt-6">
+                  <span className="text-soda-fog/40 text-[10px] tracking-wider block mb-3">TAMBIÉN DISPONIBLE EN</span>
+                  <div className="flex flex-wrap gap-3">
+                    {links.youtube && <a href={links.youtube} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 border border-soda-mist/15 rounded-sm text-soda-lamp/70 text-xs tracking-wider hover:border-soda-accent/30 hover:text-soda-lamp transition-all duration-500"><ExternalLink size={12} />YouTube</a>}
+                    {links.spotify && !embeds.spotify && <a href={links.spotify} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 border border-soda-mist/15 rounded-sm text-soda-lamp/70 text-xs tracking-wider hover:border-soda-accent/30 hover:text-soda-lamp transition-all duration-500"><ExternalLink size={12} />Spotify</a>}
+                    {links.soundcloud && !embeds.soundcloud && <a href={links.soundcloud} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 border border-soda-mist/15 rounded-sm text-soda-lamp/70 text-xs tracking-wider hover:border-soda-accent/30 hover:text-soda-lamp transition-all duration-500"><ExternalLink size={12} />SoundCloud</a>}
                   </div>
                 </div>
               )}
 
               {/* Listen prompt */}
               {showListenPrompt && !listened && (
-                <div className="border-t border-soda-mist/10 pt-5 mt-4">
-                  <p className="text-soda-lamp/70 text-sm text-center mb-3">¿Ya escuchaste este episodio?</p>
+                <div className="border-t border-soda-mist/10 pt-5 mt-6">
+                  <p className="text-soda-lamp text-sm text-center mb-3">¿Ya escuchaste este episodio?</p>
                   <div className="flex justify-center gap-3">
                     <button onClick={() => markListened(true)} className="px-5 py-2.5 bg-soda-red/10 border border-soda-red/30 rounded-sm text-soda-lamp text-sm hover:bg-soda-red/20 transition-all duration-500">Sí, ya lo escuché</button>
                     <button onClick={() => setShowListenPrompt(false)} className="px-5 py-2.5 border border-soda-mist/15 rounded-sm text-soda-fog text-sm hover:text-soda-lamp transition-all duration-500">Todavía no</button>
@@ -332,27 +278,13 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
                 </div>
               )}
               {listened && !showListenPrompt && (
-                <div className="border-t border-soda-mist/10 pt-4 mt-4 flex items-center justify-between">
+                <div className="border-t border-soda-mist/10 pt-4 mt-6 flex items-center justify-between">
                   <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-emerald-400/70" /><span className="text-emerald-400/60 text-xs">Escuchado</span></div>
                   <button onClick={() => markListened(false)} className="text-soda-fog/30 text-[10px] hover:text-soda-fog/50 transition-colors">desmarcar</button>
                 </div>
               )}
             </div>
           </motion.div>
-
-          {/* === ZOOMED IMAGE OVERLAY === */}
-          {zoomedImg && (
-            <div className="fixed inset-0 z-[10001] flex items-center justify-center p-4 bg-soda-night/90" onClick={(e) => { e.stopPropagation(); setZoomedImg(null); }}>
-              <motion.img
-                src={zoomedImg}
-                alt="Zoom"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="max-w-full max-h-[85vh] object-contain rounded-sm"
-              />
-              <button onClick={() => setZoomedImg(null)} className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center text-soda-fog/60 hover:text-soda-lamp bg-soda-night/60"><X size={18} /></button>
-            </div>
-          )}
         </div>
       )}
     </>

@@ -84,15 +84,22 @@ export const HomePage: React.FC = () => {
       <DestinationsMap />
 
 
-            {/* ===== ESCUCHÁ EN ===== */}
+      {/* ===== ESCUCHÁ EN ===== */}
       <section className="relative py-20 sm:py-28 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <p className="text-soda-lamp/40 text-[9px] tracking-[0.4em] uppercase mb-10">Escuchá en tu plataforma favorita</p>
-            <div className="flex items-center justify-center gap-8 sm:gap-12 flex-wrap">
-              {((content as any).platforms || []).filter((p: any) => p.visible).map((p: any) => (
-                <a key={p.id} href={p.url} target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-3 opacity-30 hover:opacity-70 transition-opacity duration-700" title={p.name}>
-                  <span className="text-soda-lamp/50 text-sm sm:text-base group-hover:text-soda-glow transition-colors duration-500 font-light tracking-wide">{p.name}</span>
+            <div className="flex items-center justify-center gap-8 sm:gap-14 flex-wrap">
+              {[
+                { name: 'Spotify', svg: 'M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z' },
+                { name: 'Apple Podcasts', svg: 'M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-.563 18.656c-.1.453-.348.78-.727.937-.222.1-.453.141-.687.141s-.465-.047-.687-.141c-.379-.157-.627-.484-.727-.937l-.6-3.375C7.856 14.348 7.8 13.5 7.8 12.75c0-2.317 1.883-4.2 4.2-4.2s4.2 1.883 4.2 4.2c0 .75-.056 1.598-.209 2.531l-.6 3.375zm.563-9.206a2.4 2.4 0 11-4.8 0 2.4 2.4 0 014.8 0z' },
+                { name: 'YouTube', svg: 'M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z' },
+              ].map(p => (
+                <a key={p.name} href="#" className="group flex flex-col items-center gap-3 opacity-30 hover:opacity-70 transition-opacity duration-700" title={p.name}>
+                  <svg viewBox="0 0 24 24" className="w-8 h-8 fill-soda-lamp group-hover:fill-soda-glow transition-colors duration-500">
+                    <path d={p.svg} />
+                  </svg>
+                  <span className="text-soda-lamp/40 text-[9px] tracking-[0.15em] uppercase group-hover:text-soda-lamp/70 transition-colors duration-500">{p.name}</span>
                 </a>
               ))}
             </div>
@@ -100,17 +107,12 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
+
       {/* ===== TESTIMONIOS ===== */}
       <section className="relative py-20 sm:py-28 px-6 overflow-hidden">
-        {/* Particles */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[{x:12,y:20},{x:78,y:10},{x:40,y:75},{x:88,y:50},{x:25,y:45},{x:65,y:85},{x:50,y:15},{x:5,y:65}].map((p,i) => (
-            <div key={`te-${i}`} className="absolute rounded-full animate-float" style={{ left: `${p.x}%`, top: `${p.y}%`, width: 2, height: 2, background: i % 2 === 0 ? 'rgba(196,85,85,0.35)' : 'rgba(212,197,176,0.2)', animationDuration: `${9 + i * 1.5}s`, animationDelay: `${i * 0.8}s` }} />
-          ))}
-        </div>
         <div className="max-w-5xl mx-auto relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <p className="text-soda-lamp/30 text-[9px] tracking-[0.4em] uppercase text-center mb-14">Lo que dicen los oyentes</p>
+            <p className="text-soda-lamp/50 text-[9px] tracking-[0.4em] uppercase text-center mb-14">Lo que dicen los oyentes</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -119,15 +121,15 @@ export const HomePage: React.FC = () => {
               { quote: 'Lo descubrí por casualidad y ahora no puedo parar. Cada ciudad es un mundo nuevo.', author: 'Valentina S.', from: 'Montevideo' },
             ].map((t, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}
-                className="relative p-8 border border-soda-mist/10 rounded-sm group hover:border-soda-mist/20 transition-all duration-700"
+                className="relative p-8 border border-soda-mist/14 rounded-sm group hover:border-soda-mist/25 transition-all duration-700"
               >
-                <span className="absolute -top-3 left-6 text-soda-red/20 text-6xl font-serif leading-none select-none">&ldquo;</span>
-                <p className="text-soda-lamp/60 text-sm font-light leading-relaxed mb-6 relative z-10">{t.quote}</p>
+                <span className="absolute -top-3 left-6 text-soda-red/35 text-6xl font-serif leading-none select-none">&ldquo;</span>
+                <p className="text-soda-lamp/80 text-sm font-light leading-relaxed mb-6 relative z-10">{t.quote}</p>
                 <div className="flex items-center gap-2">
                   <div className="w-6 h-px bg-soda-red/40" />
-                  <span className="text-soda-lamp/60 text-[10px] tracking-wider">{t.author}</span>
+                  <span className="text-soda-lamp/75 text-[10px] tracking-wider">{t.author}</span>
                   <span className="text-soda-lamp/30 text-[10px]">·</span>
-                  <span className="text-soda-lamp/35 text-[10px]">{t.from}</span>
+                  <span className="text-soda-lamp/55 text-[10px]">{t.from}</span>
                 </div>
               </motion.div>
             ))}

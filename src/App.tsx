@@ -148,7 +148,7 @@ const Footer: React.FC = () => {
             ) : null}
             <div>
               <span className="font-serif text-soda-glow/70 text-sm block leading-tight">sodaroja</span>
-              <span className="text-soda-lamp/25 text-[8px] tracking-[0.12em] block mt-0.5">Un podcast que viaja</span>
+              <span className="text-soda-lamp/40 text-[8px] tracking-[0.12em] block mt-0.5">Un podcast que viaja</span>
             </div>
           </div>
 

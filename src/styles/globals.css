@@ -111,18 +111,12 @@ body::before {
   50% { box-shadow: 0 0 20px rgba(196,85,85,0.08), inset 0 0 15px rgba(196,85,85,0.03); border-color: rgba(196,85,85,0.35); }
 }
 
-/* ===== FLOAT — GPU optimized ===== */
+/* ===== FLOAT ===== */
 @keyframes float {
-  0% { transform: translate3d(0, 0, 0); opacity: 0.15; }
-  25% { transform: translate3d(4px, -14px, 0); opacity: 0.45; }
-  50% { transform: translate3d(-3px, -28px, 0); opacity: 0.55; }
-  75% { transform: translate3d(5px, -14px, 0); opacity: 0.35; }
-  100% { transform: translate3d(0, 0, 0); opacity: 0.15; }
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.2; }
+  50% { transform: translateY(-30px) scale(1.1); opacity: 0.6; }
 }
-.animate-float {
-  animation: float 8s ease-in-out infinite;
-  will-change: transform, opacity;
-}
+.animate-float { animation: float 8s ease-in-out infinite; }
 
 @keyframes vhsScan { 0% { top: -100%; } 100% { top: 100%; } }
 
@@ -210,38 +204,40 @@ body::before {
   body::after, body::before, .vhs-global-band { display: none; }
 }
 
-/* ===== SMOOTH IMAGE LOADING ===== */
-img {
-  transition: opacity 0.3s ease;
+/* ===== LEAFLET MAP CUSTOM STYLES ===== */
+.sr-marker { background: none !important; border: none !important; }
+.sr-dot {
+  position: absolute; top: 50%%; left: 50%%; transform: translate(-50%%, -50%%);
+  width: 8px; height: 8px; border-radius: 50%%;
+  background: rgba(196, 85, 85, 0.85);
+  box-shadow: 0 0 8px rgba(196, 85, 85, 0.5), 0 0 16px rgba(196, 85, 85, 0.2);
 }
-img[loading="lazy"] {
-  opacity: 0;
+.sr-pulse {
+  position: absolute; top: 50%%; left: 50%%; transform: translate(-50%%, -50%%);
+  width: 18px; height: 18px; border-radius: 50%%;
+  border: 1px solid rgba(196, 85, 85, 0.3);
+  animation: srPulse 2.5s ease-out infinite;
 }
-img[loading="lazy"].loaded,
-img[loading="lazy"][src] {
-  opacity: 1;
+@keyframes srPulse {
+  0%% { transform: translate(-50%%, -50%%) scale(0.5); opacity: 0.8; }
+  100%% { transform: translate(-50%%, -50%%) scale(2); opacity: 0; }
 }
-
-/* ===== FOCUS VISIBLE — Accessibility ===== */
-:focus-visible {
-  outline: 1px solid rgba(196,85,85,0.5);
-  outline-offset: 2px;
+.sr-popup-wrap .leaflet-popup-content-wrapper {
+  background: rgba(13, 17, 23, 0.95) !important;
+  border: 1px solid rgba(212, 197, 176, 0.1) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+  color: #e8e0d4 !important;
 }
-
-/* ===== SMOOTH SCROLL ===== */
-html {
-  scroll-behavior: smooth;
+.sr-popup-wrap .leaflet-popup-content { margin: 10px 14px !important; }
+.sr-popup-wrap .leaflet-popup-tip { background: rgba(13, 17, 23, 0.95) !important; border: none !important; }
+.sr-goto:hover { text-decoration: underline; }
+.leaflet-control-zoom a {
+  background: rgba(13, 17, 23, 0.8) !important;
+  color: rgba(212, 197, 176, 0.6) !important;
+  border-color: rgba(212, 197, 176, 0.1) !important;
 }
-
-/* ===== REDUCE MOTION — Accessibility ===== */
-@media (prefers-reduced-motion: reduce) {
-  .animate-float,
-  .envelope-fall,
-  .marquee-content,
-  .vhs-global-band {
-    animation: none !important;
-  }
-  * {
-    transition-duration: 0.01ms !important;
-  }
+.leaflet-control-zoom a:hover {
+  background: rgba(20, 25, 35, 0.9) !important;
+  color: rgba(212, 197, 176, 0.9) !important;
 }

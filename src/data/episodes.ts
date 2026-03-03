@@ -47,8 +47,10 @@ export const demoEpisodes: DemoEpisode[] = [
     lat: 50.0875,
     lng: 14.4214,
     publishDate: '2026-01-25',
-    links: {},
-    embeds: {},
+    links: { spotify: 'https://open.spotify.com/episode/5VKBVQoB2sBkE43qRx3Svb', youtube: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },
+    embeds: {
+      spotify: 'https://open.spotify.com/embed/episode/5VKBVQoB2sBkE43qRx3Svb?utm_source=generator&theme=0',
+    },
   },
   {
     id: '4',
@@ -80,9 +82,10 @@ export const demoEpisodes: DemoEpisode[] = [
     lat: -34.6037,
     lng: -58.3816,
     publishDate: '2025-12-20',
-    links: { youtube: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },
+    links: { youtube: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', spotify: 'https://open.spotify.com/episode/5VKBVQoB2sBkE43qRx3Svb', ivoox: 'https://www.ivoox.com/podcast-sodaroja_sq_f12345_1.html', soundcloud: 'https://soundcloud.com/sodaroja' },
     embeds: {
       spotify: 'https://open.spotify.com/embed/episode/5VKBVQoB2sBkE43qRx3Svb?utm_source=generator&theme=0',
+      youtube: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     },
   },
   {
@@ -97,8 +100,10 @@ export const demoEpisodes: DemoEpisode[] = [
     lat: 35.6762,
     lng: 139.6503,
     publishDate: '2025-12-01',
-    links: {},
-    embeds: {},
+    links: { spotify: 'https://open.spotify.com/episode/3Qm86XLflmIXVm1wd7iAGE', youtube: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },
+    embeds: {
+      spotify: 'https://open.spotify.com/embed/episode/3Qm86XLflmIXVm1wd7iAGE?utm_source=generator&theme=0',
+    },
   },
   {
     id: '1',

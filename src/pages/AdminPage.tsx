@@ -17,7 +17,7 @@ export const AdminPage: React.FC = () => {
   const [content, setContent] = useState<SiteContent>(getContent());
   const [expandedMember, setExpandedMember] = useState<number | null>(null);
   const [showNewEpisode, setShowNewEpisode] = useState(false);
-  const [newEpisode, setNewEpisode] = useState({ id: '', city: '', title: '', description: '', imageUrl: '', publishDate: '', isPremium: false, links: { youtube: '', spotify: '', soundcloud: '', ivoox: '', applePodcasts: '' }, embeds: { youtube: '', spotify: '', soundcloud: '', ivoox: '', applePodcasts: '' }, gallery: ['', '', '', '', ''] });
+  const [newEpisode, setNewEpisode] = useState({ id: '', city: '', title: '', description: '', imageUrl: '', publishDate: '', isPremium: false, links: { youtube: '', spotify: '', soundcloud: '', ivoox: '', applePodcasts: '' }, embeds: { spotify: '', soundcloud: '', ivoox: '', applePodcasts: '' } });
 
   const handleLogin = async () => {
     if (adminAttempts >= 5) { setError('Demasiados intentos. Recargá la página.'); return; }
@@ -88,7 +88,7 @@ export const AdminPage: React.FC = () => {
   const addEpisode = () => {
     const ep = { ...newEpisode, id: `ep-${Date.now()}` };
     update('episodios.items', [...content.episodios.items, ep]);
-    setNewEpisode({ id: '', city: '', title: '', description: '', imageUrl: '', publishDate: '', isPremium: false, links: { youtube: '', spotify: '', soundcloud: '', ivoox: '', applePodcasts: '' }, embeds: { youtube: '', spotify: '', soundcloud: '', ivoox: '', applePodcasts: '' }, gallery: ['', '', '', '', ''] });
+    setNewEpisode({ id: '', city: '', title: '', description: '', imageUrl: '', publishDate: '', isPremium: false, links: { youtube: '', spotify: '', soundcloud: '', ivoox: '', applePodcasts: '' }, embeds: { spotify: '', soundcloud: '', ivoox: '', applePodcasts: '' } });
     setShowNewEpisode(false);
   };
 
@@ -312,17 +312,10 @@ export const AdminPage: React.FC = () => {
                   </div>
                   <h4 className="text-soda-lamp text-sm mb-3">Embeds (URLs de iframe — se ven dentro del modal del episodio)</h4>
                   <div className="grid grid-cols-2 gap-3 mb-4">
-                    <div><label className={lc}>Embed YouTube</label><input type="text" value={(newEpisode.embeds as any).youtube || ''} onChange={(e) => setNewEpisode({ ...newEpisode, embeds: { ...newEpisode.embeds, youtube: e.target.value } } as any)} className={ic} placeholder="https://www.youtube.com/embed/..." /><p className={nc}>Usá la URL de embed, no la URL normal</p></div>
                     <div><label className={lc}>Embed Spotify</label><input type="text" value={newEpisode.embeds.spotify} onChange={(e) => setNewEpisode({ ...newEpisode, embeds: { ...newEpisode.embeds, spotify: e.target.value } })} className={ic} placeholder="https://open.spotify.com/embed/..." /></div>
-                    <div><label className={lc}>Embed Apple Podcasts</label><input type="text" value={newEpisode.embeds.applePodcasts || ''} onChange={(e) => setNewEpisode({ ...newEpisode, embeds: { ...newEpisode.embeds, applePodcasts: e.target.value } })} className={ic} placeholder="https://embed.podcasts.apple.com/..." /></div>
-                    <div><label className={lc}>Embed iVoox</label><input type="text" value={newEpisode.embeds.ivoox} onChange={(e) => setNewEpisode({ ...newEpisode, embeds: { ...newEpisode.embeds, ivoox: e.target.value } })} className={ic} placeholder="https://www.ivoox.com/player_..." /></div>
                     <div><label className={lc}>Embed SoundCloud</label><input type="text" value={newEpisode.embeds.soundcloud} onChange={(e) => setNewEpisode({ ...newEpisode, embeds: { ...newEpisode.embeds, soundcloud: e.target.value } })} className={ic} placeholder="https://w.soundcloud.com/player/..." /></div>
-                  </div>
-                  <h4 className="text-soda-lamp text-sm mb-3">Galería de imágenes (hasta 5 — se muestran en el modal)</h4>
-                  <div className="grid grid-cols-5 gap-2 mb-4">
-                    {[0,1,2,3,4].map(gi => (
-                      <div key={gi}><label className={lc}>Img {gi+1}</label><input type="text" value={(newEpisode as any).gallery?.[gi] || ''} onChange={(e) => { const g = [...((newEpisode as any).gallery || ['','','','',''])]; g[gi] = e.target.value; setNewEpisode({ ...newEpisode, gallery: g } as any); }} className={ic} placeholder="https://..." /></div>
-                    ))}
+                    <div><label className={lc}>Embed iVoox</label><input type="text" value={newEpisode.embeds.ivoox} onChange={(e) => setNewEpisode({ ...newEpisode, embeds: { ...newEpisode.embeds, ivoox: e.target.value } })} className={ic} placeholder="https://www.ivoox.com/player_..." /></div>
+                    <div><label className={lc}>Embed Apple Podcasts</label><input type="text" value={newEpisode.embeds.applePodcasts || ''} onChange={(e) => setNewEpisode({ ...newEpisode, embeds: { ...newEpisode.embeds, applePodcasts: e.target.value } })} className={ic} placeholder="https://embed.podcasts.apple.com/..." /><p className={nc}>Apple tiene embed, copiá la URL del widget</p></div>
                   </div>
                   <button onClick={addEpisode} className="w-full py-3 bg-soda-accent bg-opacity-20 border border-soda-accent text-soda-glow rounded-sm hover:bg-opacity-30 transition-all text-sm">Crear Episodio</button>
                 </div>
@@ -372,15 +365,9 @@ export const AdminPage: React.FC = () => {
                         ))}
                       </div>
                       <h4 className="text-soda-lamp text-xs mb-2">Embeds</h4>
-                      <div className="grid grid-cols-2 gap-2 mb-3">
-                        {['youtube','spotify','applePodcasts','ivoox','soundcloud'].map(lk => (
+                      <div className="grid grid-cols-2 gap-2">
+                        {['spotify','soundcloud','ivoox','applePodcasts'].map(lk => (
                           <div key={lk}><label className={lc}>Embed {lk}</label><input type="text" value={(ep.embeds || {})[lk] || ''} onChange={(e) => { const arr = [...content.episodios.items]; arr[idx] = { ...arr[idx], embeds: { ...(arr[idx].embeds || {}), [lk]: e.target.value } }; update('episodios.items', arr); }} className={ic} placeholder="URL del iframe..." /></div>
-                        ))}
-                      </div>
-                      <h4 className="text-soda-lamp text-xs mb-2">Galería de imágenes</h4>
-                      <div className="grid grid-cols-5 gap-2">
-                        {[0,1,2,3,4].map(gi => (
-                          <div key={gi}><label className={lc}>Img {gi+1}</label><input type="text" value={(ep as any).gallery?.[gi] || ''} onChange={(e) => { const arr = [...content.episodios.items]; const g = [...(arr[idx] as any).gallery || ['','','','','']]; g[gi] = e.target.value; arr[idx] = { ...arr[idx], gallery: g } as any; update('episodios.items', arr); }} className={ic} placeholder="https://..." /></div>
                         ))}
                       </div>
                     </div>
@@ -662,31 +649,6 @@ export const AdminPage: React.FC = () => {
                 <div><label className={lc}>Nombre (ej: soditas, puntos, estrellas)</label><input type="text" value={(content as any).soditasConfig?.name || 'soditas'} onChange={(e) => update('soditasConfig.name', e.target.value)} className={ic} placeholder="soditas" /></div>
                 <div><label className={lc}>Emoji</label><input type="text" value={(content as any).soditasConfig?.emoji || '🥤'} onChange={(e) => update('soditasConfig.emoji', e.target.value)} className={ic} placeholder="🥤" /></div>
               </div>
-            </div>
-
-            {/* Plataformas — "Escuchá en" */}
-            <div className={cc}>
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-serif text-soda-glow">Plataformas (Escuchá en)</h2>
-                <button className="text-soda-accent text-xs" onClick={() => {
-                  const pl = (content as any).platforms || [];
-                  update('platforms', [...pl, { id: `plt-${Date.now()}`, name: 'Nueva Plataforma', url: '#', visible: true }]);
-                }}>+ Agregar</button>
-              </div>
-              <p className={nc + ' mb-4'}>Estas plataformas aparecen en la sección "Escuchá en tu plataforma favorita". El link debe ir al perfil de Sodaroja en esa plataforma.</p>
-              {((content as any).platforms || []).map((pl: any, i: number) => (
-                <div key={pl.id} className="flex items-center gap-3 mb-2 border border-soda-mist/10 p-3 rounded-sm">
-                  <button onClick={() => {
-                    const arr = [...(content as any).platforms]; arr[i] = { ...arr[i], visible: !arr[i].visible };
-                    update('platforms', arr);
-                  }} className={`text-xs px-2 py-1 rounded-sm border ${pl.visible ? 'border-green-500/30 text-green-400' : 'border-soda-mist/15 text-soda-fog/30'}`}>
-                    {pl.visible ? 'ON' : 'OFF'}
-                  </button>
-                  <input type="text" value={pl.name} onChange={(e) => { const arr = [...(content as any).platforms]; arr[i] = { ...arr[i], name: e.target.value }; update('platforms', arr); }} className={ic + ' flex-1'} placeholder="Nombre (ej: Spotify)" />
-                  <input type="text" value={pl.url} onChange={(e) => { const arr = [...(content as any).platforms]; arr[i] = { ...arr[i], url: e.target.value }; update('platforms', arr); }} className={ic + ' flex-[2]'} placeholder="https://open.spotify.com/show/..." />
-                  <button onClick={() => { const arr = [...(content as any).platforms]; arr.splice(i, 1); update('platforms', arr); }} className="text-soda-red/40 hover:text-soda-red text-xs">✕</button>
-                </div>
-              ))}
             </div>
 
             {/* Sponsors */}
