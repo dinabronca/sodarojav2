@@ -130,7 +130,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 1 }}
-            className="text-6xl md:text-7xl font-serif font-light tracking-wider text-soda-glow mb-6"
+            className="text-6xl md:text-8xl font-serif font-light tracking-wider text-soda-glow mb-6"
           >
             {hero.title}
           </motion.h1>
@@ -141,7 +141,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-soda-fog/60 text-base md:text-lg font-light tracking-wide mb-4"
+            className="text-soda-fog/65 text-base md:text-lg font-light tracking-wide mb-4"
           >
             {hero.subtitle}
           </motion.div>
@@ -152,7 +152,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
             transition={{ delay: 0.9, duration: 0.8 }}
-            className="w-[100px] h-px bg-soda-red/30 mx-auto mb-8"
+            className="w-[120px] h-px bg-soda-red/40 mx-auto mb-8"
           />
         )}
 
@@ -161,7 +161,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1, duration: 0.8 }}
-            className="text-soda-fog/50 text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed whitespace-pre-line"
+            className="text-soda-fog/55 text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed whitespace-pre-line"
           >
             {hero.description}
           </motion.p>
@@ -176,7 +176,7 @@ export const Hero: React.FC = () => {
         transition={{ delay: 2, duration: 1 }}
       >
         <motion.div
-          className="w-px h-8 bg-gradient-to-b from-soda-fog/20 to-transparent"
+          className="w-px h-8 bg-gradient-to-b from-soda-red/25 to-transparent"
           animate={{ scaleY: [0.5, 1, 0.5], opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
         />

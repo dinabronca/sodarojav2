@@ -69,11 +69,11 @@ export const EpisodiosPage: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-3 mb-10 sm:mb-14">
           <div className="relative flex-1">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-soda-fog/30" />
-            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar por ciudad o #número..." className="w-full bg-soda-night/50 border border-soda-mist/10 rounded-sm pl-9 pr-4 py-2.5 text-soda-lamp text-sm font-light focus:border-soda-accent/25 focus:outline-none transition-colors duration-500" />
+            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar por ciudad o #número..." className="w-full bg-soda-night/50 border border-soda-mist/10 rounded-sm pl-9 pr-4 py-2.5 text-soda-lamp text-sm font-light focus:border-soda-red/30 focus:outline-none focus:ring-1 focus:ring-soda-red/10 transition-colors duration-500" />
           </div>
           <div className="flex gap-2">
             {(['all', 'free', 'premium'] as const).map(f => (
-              <button key={f} onClick={() => setFilter(f)} className={`px-4 py-2.5 rounded-sm text-[10px] tracking-[0.15em] uppercase transition-all duration-500 border ${filter === f ? 'border-soda-red/30 text-soda-lamp bg-soda-red/5' : 'border-soda-mist/10 text-soda-fog/35 hover:text-soda-fog/55'}`}>
+              <button key={f} onClick={() => setFilter(f)} className={`px-4 py-2.5 rounded-sm text-[10px] tracking-[0.15em] uppercase transition-all duration-500 border ${filter === f ? 'border-soda-red/30 text-soda-lamp bg-soda-red/8' : 'border-soda-mist/10 text-soda-fog/35 hover:text-soda-fog/55'}`}>
                 {f === 'all' ? 'TODOS' : f === 'free' ? 'ABIERTOS' : 'FRECUENCIA INTERNA'}
               </button>
             ))}
@@ -83,7 +83,7 @@ export const EpisodiosPage: React.FC = () => {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filtered.map((episode: any, index: number) => (
-            <motion.div key={episode.id} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.5) }}>
+            <motion.div key={episode.id} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: Math.min(index * 0.1, 0.8), ease: 'easeOut' }}>
               <EpisodeCard episode={episode} isNewest={episode.id === newestId} episodeNumber={episodeNumberMap[episode.id]} />
             </motion.div>
           ))}
@@ -93,7 +93,7 @@ export const EpisodiosPage: React.FC = () => {
           <div className="text-center py-16"><p className="text-soda-fog text-lg">No se encontraron episodios</p></div>
         )}
 
-        <div className="text-center mt-12 sm:mt-16"><p className="text-soda-fog/30 text-[11px] tracking-wider">Más episodios próximamente</p></div>
+        <div className="text-center mt-12 sm:mt-16"><p className="text-soda-fog/40 text-[11px] tracking-wider">Más episodios próximamente</p></div>
       </div>
     </section>
   );

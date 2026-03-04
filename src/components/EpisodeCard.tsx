@@ -142,7 +142,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
 
             {/* Listened dot */}
             {listened && (
-              <div className="absolute bottom-3 right-3 z-20 flex items-center gap-1.5 bg-soda-night/50 backdrop-blur-sm px-2 py-1 rounded-sm">
+              <div className="absolute bottom-3 right-3 z-20 flex items-center gap-1.5 bg-soda-night/60 backdrop-blur-sm px-2 py-1 rounded-sm">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                 <span className="text-emerald-400/80 text-[9px] tracking-wider">Escuchado</span>
               </div>

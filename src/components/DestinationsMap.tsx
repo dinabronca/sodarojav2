@@ -23,6 +23,8 @@ const cityCoords: Record<string, { lat: number; lng: number }> = {
   'LIMA': { lat: -12.0464, lng: -77.0428 },
   'BOGOTA': { lat: 4.7110, lng: -74.0721 },
   'SANTIAGO': { lat: -33.4489, lng: -70.6693 },
+  'COPENHAGUE': { lat: 55.6761, lng: 12.5683 },
+  'OTTAWA': { lat: 45.4215, lng: -75.6972 },
 };
 
 const normalize = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();

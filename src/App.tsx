@@ -57,11 +57,11 @@ const AirportCounter: React.FC = () => {
   return (
     <div className="flex items-start justify-center gap-5 sm:gap-7">
       {renderFlap('países', String(countries || '—').padStart(2, '0'), 0.2)}
-      <span className="text-soda-lamp/20 text-lg mt-0.5">·</span>
+      <span className="text-soda-lamp/35 text-lg mt-0.5">·</span>
       {renderFlap('ciudades', String(cities).padStart(2, '0'), 0.4)}
-      <span className="text-soda-lamp/20 text-lg mt-0.5">·</span>
+      <span className="text-soda-lamp/35 text-lg mt-0.5">·</span>
       {renderFlap('episodios', String(eps).padStart(2, '0'), 0.6)}
-      <span className="text-soda-lamp/20 text-lg mt-0.5">·</span>
+      <span className="text-soda-lamp/35 text-lg mt-0.5">·</span>
       {renderFlap('horas', String(hours).padStart(2, '0'), 0.8)}
     </div>
   );
@@ -120,7 +120,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="relative px-6 pt-16 pb-10">
       <div className="max-w-5xl mx-auto">
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-soda-mist/10 to-transparent mb-12" />
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-soda-mist/15 to-transparent mb-12" />
       </div>
 
       <div className="max-w-5xl mx-auto">
@@ -149,7 +149,7 @@ const Footer: React.FC = () => {
             ) : null}
             <div>
               <span className="font-serif text-soda-glow/70 text-sm block leading-tight">sodaroja</span>
-              <span className="text-soda-lamp/25 text-[8px] tracking-[0.12em] block mt-0.5">Un podcast que viaja</span>
+              <span className="text-soda-lamp/40 text-[8px] tracking-[0.12em] block mt-0.5">Un podcast que viaja</span>
             </div>
           </div>
 
@@ -180,15 +180,30 @@ const Footer: React.FC = () => {
 
 // ===== SCROLL PROGRESS BAR =====
 const ScrollProgress: React.FC = () => {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const [progress, setProgress] = React.useState(0);
+  React.useEffect(() => {
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const h = document.documentElement.scrollHeight - window.innerHeight;
+          setProgress(h > 0 ? window.scrollY / h : 0);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
   return (
-    <motion.div
-      className="fixed top-0 left-0 right-0 h-[2px] bg-soda-red/50 origin-left z-[10000]"
-      style={{ scaleX }}
+    <div
+      className="fixed top-0 left-0 right-0 h-[2px] bg-soda-red/60 origin-left z-[10000]"
+      style={{ transform: 'scaleX(' + progress + ')', willChange: 'transform' }}
     />
   );
 };
+
 
 // ===== APP =====
 function AppContent() {

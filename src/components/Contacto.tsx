@@ -123,7 +123,7 @@ export const Contacto: React.FC = () => {
               <button type="submit" disabled={status === 'sending' || !formData.subject} className={`w-full py-4 border rounded-sm transition-all duration-500 tracking-widest flex items-center justify-center gap-2 text-[11px] ${
                 status === 'sent' ? 'bg-emerald-500/10 border-emerald-500/50 text-emerald-400'
                 : status === 'error' ? 'bg-red-500/10 border-red-500/40 text-red-400/80'
-                : !formData.subject ? 'border-soda-mist/15 text-soda-fog/40 cursor-not-allowed'
+                : !formData.subject ? 'border-soda-mist/15 text-soda-fog/50 cursor-not-allowed'
                 : 'bg-soda-accent/8 border-soda-accent/30 text-soda-lamp/80 hover:bg-soda-accent/15 hover:border-soda-accent/45 hover:text-soda-lamp'
               }`}>
                 {status === 'idle' && <><Send size={16} />ENVIAR MENSAJE</>}
