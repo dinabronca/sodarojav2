@@ -667,7 +667,7 @@ export const AdminPage: React.FC = () => {
                   <button onClick={() => {
                     const arr = [...(content as any).platforms]; arr[i] = { ...arr[i], visible: !arr[i].visible };
                     update('platforms', arr);
-                  }} className={}>
+                  }} className={`text-xs px-2 py-1 rounded-sm border ${pl.visible ? 'border-green-500/30 text-green-400' : 'border-soda-mist/15 text-soda-fog/30'}`}>
                     {pl.visible ? 'ON' : 'OFF'}
                   </button>
                   <input type="text" value={pl.name} onChange={(e) => { const arr = [...(content as any).platforms]; arr[i] = { ...arr[i], name: e.target.value }; update('platforms', arr); }} className={ic + ' flex-1'} placeholder="Nombre" />
