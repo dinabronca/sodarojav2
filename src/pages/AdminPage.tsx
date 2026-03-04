@@ -287,6 +287,11 @@ export const AdminPage: React.FC = () => {
                   <h3 className="text-soda-accent text-sm font-medium mb-4">Nuevo Episodio</h3>
                   <div className="grid grid-cols-3 gap-4 mb-4">
                     <div><label className={lc}>Ciudad</label><input type="text" value={newEpisode.city} onChange={(e) => setNewEpisode({ ...newEpisode, city: e.target.value })} className={ic} placeholder="Ej: Buenos Aires" /></div>
+                <p className="text-soda-fog/30 text-[10px] mt-1 mb-2">El mapa detecta la ciudad automaticamente. Si no aparece, agrega coordenadas:</p>
+                <div className="grid grid-cols-2 gap-2">
+                  <div><label className={lc}>Latitud</label><input type="text" value={(newEpisode as any).lat || ''} onChange={(e) => setNewEpisode({ ...newEpisode, lat: parseFloat(e.target.value) || undefined } as any)} className={ic} placeholder="ej: -34.6037" /></div>
+                  <div><label className={lc}>Longitud</label><input type="text" value={(newEpisode as any).lng || ''} onChange={(e) => setNewEpisode({ ...newEpisode, lng: parseFloat(e.target.value) || undefined } as any)} className={ic} placeholder="ej: -58.3816" /></div>
+                </div>
                     <div><label className={lc}>País</label><input type="text" value={(newEpisode as any).country || ''} onChange={(e) => setNewEpisode({ ...newEpisode, country: e.target.value } as any)} className={ic} placeholder="Ej: Argentina" /></div>
                     <div><label className={lc}>Título</label><input type="text" value={newEpisode.title} onChange={(e) => setNewEpisode({ ...newEpisode, title: e.target.value })} className={ic} placeholder="Ej: La Dama de Blanco" /></div>
                   </div>

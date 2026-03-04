@@ -32,21 +32,21 @@ const AuroraEffect: React.FC = () => {
   return (
     <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 1 }}>
       {/* Aurora rojo/magenta */}
-      <motion.div className="absolute" style={{ left: '-15%', top: '-25%', width: '80%', height: '60%',
+      <div className="absolute" style={{ left: '-15%', top: '-25%', width: '80%', height: '60%',
         background: 'radial-gradient(ellipse at 30% 50%, rgba(196,85,85,0.12) 0%, rgba(139,58,58,0.05) 40%, transparent 70%)',
         filter: 'blur(60px)' }}
         animate={{ x: [0, 100, -40, 0], y: [0, 40, -25, 0], opacity: [0.5, 0.8, 0.6, 0.5] }}
         transition={{ duration: isMobile ? 25 : 14, repeat: Infinity, ease: 'easeInOut' }}
       />
       {/* Aurora azul */}
-      <motion.div className="absolute" style={{ right: '-10%', top: '5%', width: '65%', height: '55%',
+      <div className="absolute" style={{ right: '-10%', top: '5%', width: '65%', height: '55%',
         background: 'radial-gradient(ellipse at 60% 40%, rgba(138,155,196,0.10) 0%, rgba(100,130,180,0.04) 40%, transparent 70%)',
         filter: 'blur(55px)' }}
         animate={{ x: [0, -70, 50, 0], y: [0, -35, 25, 0], opacity: [0.4, 0.7, 0.5, 0.4] }}
         transition={{ duration: isMobile ? 28 : 17, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
       />
       {/* Aurora verde tenue */}
-      {!isMobile && <motion.div className="absolute" style={{ left: '15%', bottom: '-5%', width: '70%', height: '40%',
+      {!isMobile && <div className="absolute" style={{ left: '15%', bottom: '-5%', width: '70%', height: '40%',
         background: 'radial-gradient(ellipse at 50% 80%, rgba(80,180,120,0.05) 0%, transparent 60%)',
         filter: 'blur(55px)' }}
         animate={{ x: [0, 60, -40, 0], opacity: [0.3, 0.55, 0.35, 0.3] }}
@@ -55,7 +55,7 @@ const AuroraEffect: React.FC = () => {
 
       {/* ===== RAYOS DE LUZ ===== */}
       {[0, 1, 2, 3, 4].map(i => (
-        <motion.div key={`ray-${i}`} className="absolute"
+        <div key={`ray-${i}`} className="absolute"
           style={{
             left: `${10 + i * 20}%`, top: 0, width: '2px', height: '100%',
             background: `linear-gradient(to bottom, transparent 0%, ${i % 2 === 0 ? 'rgba(196,85,85,0.12)' : 'rgba(138,155,196,0.08)'} 30%, ${i % 2 === 0 ? 'rgba(196,85,85,0.06)' : 'rgba(138,155,196,0.04)'} 70%, transparent 100%)`,
@@ -69,7 +69,7 @@ const AuroraEffect: React.FC = () => {
       ))}
       {/* Rayos diagonales anchos */}
       {!isMobile && [0, 1].map(i => (
-        <motion.div key={`dray-${i}`} className="absolute"
+        <div key={`dray-${i}`} className="absolute"
           style={{
             left: `${20 + i * 45}%`, top: '-10%', width: '80px', height: '120%',
             background: `linear-gradient(${150 + i * 30}deg, transparent 0%, rgba(196,85,85,0.03) 40%, rgba(138,155,196,0.02) 60%, transparent 100%)`,
@@ -211,7 +211,7 @@ const SubscriberDashboard: React.FC = () => {
       <div className="glitch-bar" />
       {/* ===== HEADER — Editorial style ===== */}
       <div className="text-center">
-        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="space-y-5">
+        <div className="space-y-5">
           {/* Red line + label */}
           <div className="flex items-center gap-3 justify-center">
             <div className="w-8 h-px bg-soda-red" />
@@ -228,11 +228,11 @@ const SubscriberDashboard: React.FC = () => {
           </p>
 
           <div className="flex items-center justify-center gap-4 flex-wrap">
-            <motion.div animate={{ opacity: [0.7, 1, 0.7] }} transition={{ duration: 2, repeat: Infinity }}
+            <div
               className="inline-flex items-center gap-2 bg-soda-red/8 border border-soda-red/25 rounded-sm px-4 py-2">
-              <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }} className="w-2 h-2 bg-soda-red rounded-full" style={{ boxShadow: '0 0 8px rgba(196,85,85,0.4)' }} />
+              <div className="w-2 h-2 bg-soda-red rounded-full" style={{ boxShadow: '0 0 8px rgba(196,85,85,0.4)' }} />
               <span className="text-soda-red text-[10px] tracking-[0.2em] uppercase font-medium">Señal activa</span>
-            </motion.div>
+            </div>
             <button onClick={() => setShowMissions(!showMissions)}
               className="inline-flex items-center gap-2 bg-soda-accent/8 border border-soda-accent/20 rounded-sm px-4 py-2 hover:bg-soda-accent/12 transition-all duration-500">
               <span className="text-sm">🥤</span>
@@ -241,13 +241,13 @@ const SubscriberDashboard: React.FC = () => {
               <ChevronRight size={12} className={`text-soda-fog/40 transition-transform duration-300 ${showMissions ? 'rotate-90' : ''}`} />
             </button>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* ===== MISIONES SODITAS (expandible) ===== */}
       <AnimatePresence>
         {showMissions && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
+          <div exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden">
             <div className="bg-soda-slate/30 backdrop-blur-sm border border-soda-accent/15 rounded-sm p-6 max-w-3xl mx-auto">
               <h3 className="text-soda-glow font-serif text-base mb-5 flex items-center gap-2">🥤 Cómo ganar <em className="text-soda-red/85">soditas</em></h3>
@@ -275,7 +275,7 @@ const SubscriberDashboard: React.FC = () => {
                 })}
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
 
@@ -285,7 +285,7 @@ const SubscriberDashboard: React.FC = () => {
       {/* ===== GRID 3 COLUMNAS ===== */}
       <div className="relative">
         {/* Atmospheric glow behind panels */}
-        <motion.div className="absolute" style={{ left: '20%', top: '10%', width: '60%', height: '80%', background: 'radial-gradient(ellipse, rgba(196,85,85,0.04) 0%, transparent 70%)', filter: 'blur(60px)', zIndex: 0 }}
+        <div className="absolute" style={{ left: '20%', top: '10%', width: '60%', height: '80%', background: 'radial-gradient(ellipse, rgba(196,85,85,0.04) 0%, transparent 70%)', filter: 'blur(60px)', zIndex: 0 }}
           animate={{ opacity: [0.3, 0.6, 0.3] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }} />
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 relative" style={{ zIndex: 1 }}>
 
@@ -300,7 +300,7 @@ const SubscriberDashboard: React.FC = () => {
             <div className="space-y-1">
               <button onClick={() => setOpenPanel(openPanel === 'plan' ? null : 'plan')} className="w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-sm text-xs text-soda-fog hover:text-soda-lamp hover:bg-soda-mist/5 transition-all"><ArrowRight size={12} className="text-soda-accent/50" />Cambiar plan</button>
               <AnimatePresence>{openPanel === 'plan' && (
-                <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+                <div exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
                   <div className="py-2 space-y-2">
                     {plans.map(p => (
                       <button key={p.id} onClick={() => { setUserPlan(p.id); localStorage.setItem('sodaroja-user-plan', p.id); setOpenPanel(null); }}
@@ -310,12 +310,12 @@ const SubscriberDashboard: React.FC = () => {
                       </button>
                     ))}
                   </div>
-                </motion.div>
+                </div>
               )}</AnimatePresence>
 
               <button onClick={() => setOpenPanel(openPanel === 'payment' ? null : 'payment')} className="w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-sm text-xs text-soda-fog hover:text-soda-lamp hover:bg-soda-mist/5 transition-all"><CreditCard size={12} className="text-soda-accent/50" />Medio de pago</button>
               <AnimatePresence>{openPanel === 'payment' && (
-                <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+                <div exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
                   <div className="py-2 space-y-2">
                     {['Visa ****6411', 'Mastercard ****2190', 'Mercado Pago'].map((m, i) => (
                       <button key={i} onClick={() => { setPayMethod(m); localStorage.setItem('sodaroja-pay-method', m); setOpenPanel(null); }}
@@ -325,12 +325,12 @@ const SubscriberDashboard: React.FC = () => {
                     ))}
                     <p className="text-soda-fog/40 text-[10px] px-1">En producción se conecta con tu pasarela de pagos.</p>
                   </div>
-                </motion.div>
+                </div>
               )}</AnimatePresence>
 
               <button onClick={() => setOpenPanel(openPanel === 'history' ? null : 'history')} className="w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-sm text-xs text-soda-fog hover:text-soda-lamp hover:bg-soda-mist/5 transition-all"><BarChart3 size={12} className="text-soda-accent/50" />Historial de pagos</button>
               <AnimatePresence>{openPanel === 'history' && (
-                <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+                <div exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
                   <div className="py-2 space-y-1.5">
                     {[
                       { date: '01/02/2026', amount: 5000, method: payMethod, status: 'Pagado' },
@@ -344,7 +344,7 @@ const SubscriberDashboard: React.FC = () => {
                     ))}
                     <p className="text-soda-fog/40 text-[10px] px-1">En producción estos datos vienen de tu pasarela.</p>
                   </div>
-                </motion.div>
+                </div>
               )}</AnimatePresence>
 
               <button className="w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-sm text-xs text-soda-fog/40 hover:text-red-400/60 transition-all"><LogOut size={12} className="text-soda-accent/50" />Dar de baja</button>
@@ -396,9 +396,9 @@ const SubscriberDashboard: React.FC = () => {
               </>
             ) : (
               <div className="px-5 py-10 text-center">
-                <motion.div animate={{ rotate: [0, 5, -5, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}>
+                <div>
                   <BarChart3 size={28} className="text-soda-accent/25 mx-auto mb-3" />
-                </motion.div>
+                </div>
                 <p className="text-soda-fog font-serif text-sm mb-1">Sin encuestas activas</p>
                 <p className="text-soda-fog/30 text-[11px]">Cuando haya una encuesta, votá y ganá soditas.</p>
               </div>
@@ -419,7 +419,7 @@ const SubscriberDashboard: React.FC = () => {
                         <h4 className="text-soda-glow font-serif text-base">{currentRaffle.title}</h4>
                         <p className="text-soda-fog text-xs mt-1">{currentRaffle.description}</p>
                       </div>
-                      <motion.span animate={{ rotate: [0, 5, -5, 0] }} transition={{ duration: 2, repeat: Infinity }} className="text-2xl">🎰</motion.span>
+                      <span animate={{ rotate: [0, 5, -5, 0] }} transition={{ duration: 2, repeat: Infinity }} className="text-2xl">🎰</span>
                     </div>
                   </div>
                 )}
@@ -444,9 +444,9 @@ const SubscriberDashboard: React.FC = () => {
               </>
             ) : (
               <div className="px-5 py-10 text-center">
-                <motion.div animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.4, 0.2] }} transition={{ duration: 3, repeat: Infinity }}>
+                <div>
                   <Trophy size={28} className="text-soda-red/25 mx-auto mb-3" />
-                </motion.div>
+                </div>
                 <p className="text-soda-fog font-serif text-sm mb-1">Sin sorteos activos</p>
                 <p className="text-soda-fog/30 text-[11px]">Guardá tus soditas 🥤 para cuando haya uno.</p>
               </div>
@@ -470,7 +470,7 @@ const SubscriberDashboard: React.FC = () => {
               ) : (
                 <div className="divide-y divide-soda-mist/5">
                   {notifications.slice().reverse().map((n: any) => (
-                    <motion.div key={n.id} initial={!n.read ? { x: -5 } : false} animate={{ x: 0 }}
+                    <div key={n.id} initial={!n.read ? { x: -5 } : false}
                       onClick={() => markNotifRead(n.id)}
                       className={`px-4 py-3 cursor-pointer transition-colors ${!n.read ? 'bg-soda-red/5 hover:bg-soda-red/8' : 'hover:bg-soda-mist/3'}`}>
                       <div className="flex items-start gap-2.5">
@@ -485,16 +485,16 @@ const SubscriberDashboard: React.FC = () => {
                       </div>
                       {/* Efecto confeti para winners */}
                       {n.type === 'winner' && !n.read && (
-                        <motion.div className="flex justify-center gap-1 mt-1"
+                        <div className="flex justify-center gap-1 mt-1"
                           animate={{ y: [-5, 0], opacity: [0, 1] }} transition={{ duration: 0.5 }}>
                           {['🎊', '✨', '🎉'].map((e, i) => (
-                            <motion.span key={i} animate={{ y: [0, -8, 0], rotate: [0, 10, -10, 0] }}
+                            <span key={i} animate={{ y: [0, -8, 0], rotate: [0, 10, -10, 0] }}
                               transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.3 }}
-                              className="text-xs">{e}</motion.span>
+                              className="text-xs">{e}</span>
                           ))}
-                        </motion.div>
+                        </div>
                       )}
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               )}
@@ -512,9 +512,9 @@ const SubscriberDashboard: React.FC = () => {
             <div className="max-h-[480px] overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
               {messages.length === 0 ? (
                 <div className="px-5 py-14 text-center">
-                  <motion.div animate={{ opacity: [0.15, 0.35, 0.15] }} transition={{ duration: 4, repeat: Infinity }}>
+                  <div>
                     <Radio size={32} className="text-soda-red/20 mx-auto mb-4" />
-                  </motion.div>
+                  </div>
                   <p className="text-soda-fog font-serif text-sm mb-1">Silencio en la frecuencia...</p>
                   <p className="text-soda-fog/30 text-[11px]">Cuando publiquemos algo, lo ves acá primero.</p>
                 </div>
@@ -585,10 +585,10 @@ const PollPage: React.FC<{ poll: any; onClose: () => void; onComplete: (answers:
   const q = questions[current];
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+    <div exit={{ opacity: 0 }}
       className="fixed inset-0 z-[9999] flex items-center justify-center p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-soda-night/95" />
-      <motion.div initial={{ scale: 0.95, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95 }}
+      <div exit={{ scale: 0.95 }}
         className="relative w-full max-w-lg max-h-[85vh] overflow-y-auto bg-soda-deep border border-soda-accent/20 rounded-sm" style={{ WebkitOverflowScrolling: 'touch' }} onClick={e => e.stopPropagation()}>
         {current === 0 && poll.bannerUrl && <img src={poll.bannerUrl} alt="" className="w-full h-auto" />}
         <div className="p-6">
@@ -602,7 +602,7 @@ const PollPage: React.FC<{ poll: any; onClose: () => void; onComplete: (answers:
           </div>
 
           <AnimatePresence mode="wait">
-            <motion.div key={current} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.2 }}>
+            <div key={current} exit={{ opacity: 0, x: -20 }}>
               <h3 className="text-soda-glow font-serif text-lg mb-4">{q.question}</h3>
               <div className="space-y-2">
                 {q.options.map((opt: string, idx: number) => {
@@ -617,12 +617,12 @@ const PollPage: React.FC<{ poll: any; onClose: () => void; onComplete: (answers:
                   );
                 })}
               </div>
-            </motion.div>
+            </div>
           </AnimatePresence>
         </div>
         <button onClick={onClose} className="absolute top-3 right-3 w-8 h-8 bg-soda-night/80 rounded-full flex items-center justify-center text-soda-fog hover:text-soda-lamp">✕</button>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 
@@ -637,37 +637,37 @@ const PublicView: React.FC = () => {
   return (
     <>
       {[...Array(isMobile ? 3 : 6)].map((_, i) => (
-        <motion.div key={`w-${i}`} className="absolute left-1/2 top-1/2 border-2 border-soda-red rounded-full pointer-events-none"
+        <div key={`w-${i}`} className="absolute left-1/2 top-1/2 border-2 border-soda-red rounded-full pointer-events-none"
           style={{ width: `${300 + i * 150}px`, height: `${300 + i * 150}px`, marginLeft: `-${150 + i * 75}px`, marginTop: `-${150 + i * 75}px` }}
           animate={{ scale: [1, 1.1, 1], opacity: [0.05, 0.15, 0.05] }}
           transition={{ duration: 4 + i * 0.5, repeat: Infinity, delay: i * 0.5 }}
         />
       ))}
       {[...Array(isMobile ? 4 : 20)].map((_, i) => (
-        <motion.div key={`p-${i}`} className="absolute w-1 h-1 bg-soda-red rounded-full opacity-40"
+        <div key={`p-${i}`} className="absolute w-1 h-1 bg-soda-red rounded-full opacity-40"
           style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
           animate={{ y: [0, -50, 0], opacity: [0.1, 0.4, 0.1] }}
           transition={{ duration: 5 + Math.random() * 5, repeat: Infinity, delay: Math.random() * 5 }}
         />
       ))}
       <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-          <motion.div animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} className="inline-block mb-8">
+        <div className="text-center mb-12">
+          <div className="inline-block mb-8">
             <div className="text-8xl text-soda-red">◉</div>
-          </motion.div>
+          </div>
           <h2 className="text-5xl md:text-6xl font-serif text-soda-glow mb-6">Frecuencia <em className="text-soda-red/85">Interna</em></h2>
           <div className="w-32 h-px bg-gradient-to-r from-transparent via-soda-red to-transparent mx-auto mb-8" />
           <p className="text-soda-lamp text-xl font-light max-w-2xl mx-auto mb-8">Las historias que se cuentan cuando la noche ya está avanzada</p>
-        </motion.div>
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="max-w-3xl mx-auto mb-20">
+        </div>
+        <div className="max-w-3xl mx-auto mb-20">
           <p className="text-soda-fog text-base font-light leading-relaxed text-center">Sodaroja es un proyecto independiente que hacemos con amor, pero también con tiempo, energía y recursos. Cada episodio lleva horas de investigación, edición y producción. Tu aporte nos permite seguir haciéndolo.</p>
-        </motion.div>
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+          <div>
             <h3 className="text-2xl font-serif text-soda-glow mb-8 text-center lg:text-left">Elegí cómo querés sumarte</h3>
             <div className="space-y-6">
               {plans.map((plan, idx) => (
-                <motion.div key={plan.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }}
+                <div key={plan.id}
                   onClick={() => setSelectedPlan(plan.id)}
                   className={`relative bg-soda-night/50 rounded-sm p-8 transition-all duration-500 cursor-pointer ${
                     selectedPlan === plan.id ? 'border border-soda-red/60 scale-[1.01]' : plan.featured ? 'border border-soda-accent/40' : 'border border-soda-mist/15 hover:border-soda-mist/30'
@@ -678,23 +678,23 @@ const PublicView: React.FC = () => {
                     <div><h4 className="text-2xl font-serif text-soda-glow mb-2">{plan.name}</h4><p className="text-soda-fog text-sm">{plan.description}</p></div>
                     <div className="text-right"><div className="text-3xl font-light text-soda-lamp">${plan.priceARS.toLocaleString('es-AR')}</div><div className="text-sm text-soda-fog">USD ${plan.priceUSD}/mes</div></div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+          </div>
+          <div>
             <h3 className="text-2xl font-serif text-soda-glow mb-8 text-center lg:text-left">Qué te llevas al sumarte</h3>
             <div className="space-y-4">
               {benefits.map((b, i) => (
-                <motion.div key={i} initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="flex items-start gap-4 group">
+                <div key={i} className="flex items-start gap-4 group">
                   <div className="flex-shrink-0 w-6 h-6 rounded-sm border border-soda-accent/40 flex items-center justify-center group-hover:border-soda-red group-hover:bg-soda-red/10 transition-all"><Check size={14} className="text-soda-accent group-hover:text-soda-red" /></div>
                   <span className="text-soda-lamp font-light group-hover:text-soda-glow transition-colors">{b}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-16">
+        <div className="mt-16">
           <div className="mb-6 text-center"><div className="text-soda-lamp text-sm mb-1">Plan seleccionado: <span className="text-soda-red font-medium">{currentPlan.name}</span></div><div className="text-soda-fog text-xs">${currentPlan.priceARS.toLocaleString('es-AR')} ARS / USD ${currentPlan.priceUSD} por mes</div></div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
             <button className="w-full sm:w-auto px-10 py-5 bg-soda-red/10 border border-soda-red/50 text-soda-glow rounded-sm hover:bg-soda-red/20 hover:border-soda-red/70 transition-all duration-500 tracking-wider">
@@ -707,7 +707,7 @@ const PublicView: React.FC = () => {
             </button>
           </div>
           <p className="text-soda-fog text-xs mt-8 font-light text-center">Cancelá cuando quieras, sin compromiso ni letra chica</p>
-        </motion.div>
+        </div>
       </div>
     </>
   );

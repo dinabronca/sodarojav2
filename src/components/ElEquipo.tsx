@@ -207,8 +207,8 @@ export const ElEquipo: React.FC = () => {
             >
               <div className="bg-soda-slate bg-opacity-40 backdrop-blur-sm border border-soda-mist border-opacity-15 rounded-sm overflow-hidden hover:border-soda-mist hover:border-opacity-30 transition-all duration-700 group hover:-translate-y-1 relative">
                 {/* Glow rojo que aparece en hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-soda-red/3 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0 rounded-sm" />
-                <div className="absolute -inset-px rounded-sm pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ background: 'linear-gradient(135deg, rgba(196,85,85,0.08), transparent 40%, transparent 60%, rgba(138,155,196,0.05))' }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-soda-red/3 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-[2000ms] pointer-events-none z-0 rounded-sm" />
+                <div className="absolute -inset-px rounded-sm pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-[2000ms]" style={{ background: 'linear-gradient(135deg, rgba(196,85,85,0.08), transparent 40%, transparent 60%, rgba(138,155,196,0.05))' }} />
                 {/* Foto - ratio 3:4 con partículas doradas, negras y color tint en hover */}
                 <div className="relative aspect-[3/4] overflow-hidden bg-soda-deep">
                   {/* Partículas doradas */}
@@ -267,11 +267,11 @@ export const ElEquipo: React.FC = () => {
                     src={member.photoUrl}
                     alt={member.name}
                     className="w-full h-full object-cover object-center"
-                    whileHover={{ scale: 1.01, transition: { duration: 0.8, ease: 'easeOut' } }}
+                    whileHover={{ scale: 1.002, transition: { duration: 2.5, ease: 'easeOut' } }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-soda-night via-transparent to-transparent opacity-60 group-hover:opacity-45 transition-opacity duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-soda-night via-transparent to-transparent opacity-60 group-hover:opacity-45 transition-opacity duration-[2000ms]" />
                 </div>
 
                 {/* Info completa — sin botón, todo visible */}

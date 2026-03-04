@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from './components/Navbar';
 import { ScrollToTop } from './components/ScrollToTop';
 import { MiniPlayer } from './components/MiniPlayer';

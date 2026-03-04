@@ -107,7 +107,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
           {/* Image */}
           <div className={`relative overflow-hidden bg-soda-deep ${featured ? 'md:w-3/5 aspect-[16/10] md:aspect-auto' : 'aspect-[16/10]'}`}>
             <img src={episode.imageUrl} alt={episode.city}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[3s] ease-out group-hover:scale-[1.008]"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[5s] ease-out group-hover:scale-[1.004]"
               loading="lazy"
               style={isLocked ? { filter: 'saturate(0.2) brightness(0.4) blur(2px)' } : isUnlockedPremium ? { filter: 'contrast(1.1) saturate(1.15) brightness(1.05)' } : {}} />
 
@@ -280,7 +280,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
                       <div key={gi} className="flex-shrink-0 cursor-pointer group/gal" style={{ scrollSnapAlign: 'start' }}
                         onClick={(e) => { e.stopPropagation(); setZoomedImg(img); }}>
                         <div className="w-20 h-[106px] sm:w-24 sm:h-32 rounded-sm overflow-hidden border border-soda-mist/10 group-hover/gal:border-soda-mist/25 transition-all duration-500">
-                          <img src={img} alt={`Foto ${gi + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover/gal:scale-[1.03]" loading="lazy" />
+                          <img src={img} alt={`Foto ${gi + 1}`} className="w-full h-full object-cover transition-transform duration-[2s] group-hover/gal:scale-[1.015]" loading="lazy" />
                         </div>
                       </div>
                     ))}

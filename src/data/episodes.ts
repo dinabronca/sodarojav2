@@ -17,7 +17,95 @@ interface DemoEpisode {
   embeds: Record<string, string>;
 }
 
-export const demoEpisodes: DemoEpisode[] = [
+export const demoEpisodes: DemoEpisode[
+  {
+    id: '9',
+    city: 'LIMA',
+    country: 'Peru',
+    durationMin: 52,
+    title: 'El Oraculo del Pacifico',
+    description: 'En los acantilados de Miraflores, un viejo surfista dice poder leer el futuro en las olas. Fuimos a escucharlo.',
+    imageUrl: 'https://images.unsplash.com/photo-1531968455001-5c5272a67c71?w=800&q=80',
+    isPremium: false,
+    lat: -12.0464,
+    lng: -77.0428,
+    publishDate: '2026-02-20',
+    links: {
+      spotify: 'https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk',
+      youtube: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      applePodcasts: 'https://podcasts.apple.com/podcast/id1234567890',
+      ivoox: 'https://www.ivoox.com/podcast-sodaroja_sq_f1234567_1.html',
+      soundcloud: 'https://soundcloud.com/sodaroja',
+    },
+    embeds: {
+      youtube: 'https://www.youtube.com/embed/jfKfPfyJRdk',
+      spotify: 'https://open.spotify.com/embed/episode/4rOoJ6Egrf8K2IrywzwOMk?utm_source=generator&theme=0',
+      applePodcasts: 'https://embed.podcasts.apple.com/us/podcast/the-daily/id1200361736?i=1000640000000&theme=dark',
+      ivoox: 'https://www.ivoox.com/player_ej_1234567_2_1.html',
+      soundcloud: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/291&color=%23c45555&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false',
+    },
+    gallery: [
+      'https://images.unsplash.com/photo-1526392060635-9d6019884377?w=400&q=80',
+      'https://images.unsplash.com/photo-1580619305218-8423a7ef79b4?w=400&q=80',
+      'https://images.unsplash.com/photo-1609438885753-5ed6e1e9b3ae?w=400&q=80',
+    ],
+  },
+  {
+    id: '8',
+    city: 'BERLIN',
+    country: 'Alemania',
+    durationMin: 48,
+    title: 'Fantasmas del Muro',
+    description: 'Treinta anos despues de la caida, hay quienes juran escuchar golpes desde el otro lado. Recorrimos el muro de noche.',
+    imageUrl: 'https://images.unsplash.com/photo-1560969184-10fe8719e047?w=800&q=80',
+    isPremium: true,
+    lat: 52.5200,
+    lng: 13.4050,
+    publishDate: '2026-02-05',
+    links: {
+      spotify: 'https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk',
+      youtube: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      ivoox: 'https://www.ivoox.com/podcast-sodaroja_sq_f1234567_1.html',
+      soundcloud: 'https://soundcloud.com/sodaroja',
+    },
+    embeds: {
+      spotify: 'https://open.spotify.com/embed/episode/0Sfs7QGMRO2VWMpeFGWCHY?utm_source=generator&theme=0',
+      soundcloud: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/291&color=%23c45555&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false',
+    },
+    gallery: [
+      'https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?w=400&q=80',
+      'https://images.unsplash.com/photo-1587330979470-3595ac045ab0?w=400&q=80',
+    ],
+  },
+  {
+    id: '7',
+    city: 'MARRAKECH',
+    country: 'Marruecos',
+    durationMin: 55,
+    title: 'El Sonido de la Medina',
+    description: 'En el laberinto mas grande del norte de Africa, los sonidos cuentan historias que las palabras no pueden.',
+    imageUrl: 'https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?w=800&q=80',
+    isPremium: false,
+    lat: 31.6295,
+    lng: -7.9811,
+    publishDate: '2026-01-15',
+    links: {
+      spotify: 'https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk',
+      applePodcasts: 'https://podcasts.apple.com/podcast/id1234567890',
+      youtube: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      soundcloud: 'https://soundcloud.com/sodaroja',
+    },
+    embeds: {
+      youtube: 'https://www.youtube.com/embed/jfKfPfyJRdk',
+      spotify: 'https://open.spotify.com/embed/episode/4rOoJ6Egrf8K2IrywzwOMk?utm_source=generator&theme=0',
+    },
+    gallery: [
+      'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=400&q=80',
+      'https://images.unsplash.com/photo-1545459720-aac8509eb02c?w=400&q=80',
+      'https://images.unsplash.com/photo-1570294646112-27ce4f174e33?w=400&q=80',
+      'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&q=80',
+    ],
+  },] = [
   {
     id: '6',
     city: 'NUEVA YORK',
