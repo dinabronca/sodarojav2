@@ -149,7 +149,7 @@ export const ElEquipo: React.FC = () => {
   const isMobileDevice = typeof window !== 'undefined' && (window.innerWidth < 768 || 'ontouchstart' in window);
   return (
     <section id="equipo" className="relative py-28 sm:py-36 px-6 overflow-hidden">
-        <span className="section-number">02</span>
+        
       <TeamAmbience />
 
       {/* Atmospheric background with aurora */}

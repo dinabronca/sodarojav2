@@ -102,7 +102,7 @@ export const HomePage: React.FC = () => {
 
             {/* ===== TESTIMONIOS ===== */}
       <section className="relative py-20 sm:py-28 px-6 overflow-hidden">
-        <span className="section-number">02</span>
+        
         <div className="max-w-5xl mx-auto relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <p className="text-soda-lamp/30 text-[9px] tracking-[0.4em] uppercase text-center mb-14">Lo que dicen los oyentes</p>

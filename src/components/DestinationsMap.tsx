@@ -108,7 +108,7 @@ export const DestinationsMap: React.FC = () => {
 
   return (
     <section className="relative py-20 sm:py-28 px-6 overflow-hidden">
-      <span className="section-number">03</span>
+      
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[{x:10,y:15},{x:85,y:25},{x:30,y:70},{x:65,y:45},{x:50,y:85},{x:90,y:65},{x:20,y:40},{x:75,y:80}].map((p: any, i: number) => (
           <div key={'mp-'+i} className="absolute rounded-full animate-float" style={{ left:p.x+'%', top:p.y+'%', width:2, height:2, background:'rgba(196,85,85,0.4)', animationDuration:(8+i*2)+'s', animationDelay:(i*0.8)+'s' }} />
