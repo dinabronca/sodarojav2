@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { getContent } from '../data/content';
 import { getCurrentUser, logoutUser, DemoUser } from '../data/auth';
 
-export const AVATARS = [
+const AVATARS = [
   { id: 'av1', name: 'Viajero', url: '/avatars/viajero.svg' },
   { id: 'av2', name: 'Explorador', url: '/avatars/explorador.svg' },
   { id: 'av3', name: 'Nomade', url: '/avatars/nomade.svg' },
@@ -20,7 +20,7 @@ export const AVATARS = [
   { id: 'av12', name: 'Calavera', url: '/avatars/calavera.svg' },
 ];
 
-const MiCuentaPage: React.FC = () => {
+export const MiCuentaPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'perfil' | 'suscripcion' | 'config'>('perfil');
   const content = getContent();
   const fields = content.userProfileFields.filter(f => f.visible);
