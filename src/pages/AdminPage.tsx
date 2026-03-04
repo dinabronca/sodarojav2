@@ -657,6 +657,28 @@ export const AdminPage: React.FC = () => {
             </div>
 
             
+            {/* Avatares */}
+            <div className={cc}>
+              <h2 className="text-xl font-serif text-soda-glow">Avatares de Usuario</h2>
+              <p className={nc + ' mb-4'}>Los usuarios eligen entre estos personajes como foto de perfil. Subi entre 10 y 15.</p>
+              <div className="grid grid-cols-5 gap-3 mb-4">
+                {((content as any).avatars || []).map((av: any, i: number) => (
+                  <div key={av.id} className="text-center border border-soda-mist/10 p-2 rounded-sm">
+                    <div className="w-12 h-12 mx-auto rounded-full bg-soda-night/50 flex items-center justify-center mb-1 overflow-hidden">
+                      {av.imageUrl ? <img src={av.imageUrl} alt={av.name} className="w-full h-full object-cover" /> : <span className="text-soda-fog/30 text-lg">?</span>}
+                    </div>
+                    <input type="text" value={av.name} onChange={(e) => { const arr = [...((content as any).avatars || [])]; arr[i] = { ...arr[i], name: e.target.value }; update('avatars', arr); }} className={ic + ' text-center text-[10px]'} />
+                    <input type="text" value={av.imageUrl || ''} onChange={(e) => { const arr = [...((content as any).avatars || [])]; arr[i] = { ...arr[i], imageUrl: e.target.value }; update('avatars', arr); }} className={ic + ' text-[9px] mt-1'} placeholder="URL imagen" />
+                    <button onClick={() => { const arr = [...((content as any).avatars || [])]; arr.splice(i, 1); update('avatars', arr); }} className="text-soda-red/30 hover:text-soda-red text-[9px] mt-1">eliminar</button>
+                  </div>
+                ))}
+              </div>
+              <button className="text-soda-accent text-xs border border-soda-accent/20 px-3 py-1.5 rounded-sm" onClick={() => {
+                const avs = (content as any).avatars || [];
+                update('avatars', [...avs, { id: 'av-'+Date.now(), name: 'Nuevo', imageUrl: '' }]);
+              }}>+ Agregar avatar</button>
+            </div>
+
             {/* Plataformas */}
             <div className={cc}>
               <div className="flex items-center justify-between mb-4">

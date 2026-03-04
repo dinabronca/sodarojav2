@@ -5,7 +5,22 @@ import { useNavigate } from 'react-router-dom';
 import { getContent } from '../data/content';
 import { getCurrentUser, logoutUser, DemoUser } from '../data/auth';
 
-export const MiCuentaPage: React.FC = () => {
+export const AVATARS = [
+  { id: 'av1', name: 'Viajero', url: '/avatars/viajero.svg' },
+  { id: 'av2', name: 'Explorador', url: '/avatars/explorador.svg' },
+  { id: 'av3', name: 'Nomade', url: '/avatars/nomade.svg' },
+  { id: 'av4', name: 'Astronauta', url: '/avatars/astronauta.svg' },
+  { id: 'av5', name: 'Pirata', url: '/avatars/pirata.svg' },
+  { id: 'av6', name: 'Detective', url: '/avatars/detective.svg' },
+  { id: 'av7', name: 'Brujita', url: '/avatars/brujita.svg' },
+  { id: 'av8', name: 'Robot', url: '/avatars/robot.svg' },
+  { id: 'av9', name: 'Fantasma', url: '/avatars/fantasma.svg' },
+  { id: 'av10', name: 'Gato', url: '/avatars/gato.svg' },
+  { id: 'av11', name: 'Alien', url: '/avatars/alien.svg' },
+  { id: 'av12', name: 'Calavera', url: '/avatars/calavera.svg' },
+];
+
+const MiCuentaPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'perfil' | 'suscripcion' | 'config'>('perfil');
   const content = getContent();
   const fields = content.userProfileFields.filter(f => f.visible);

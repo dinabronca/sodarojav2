@@ -174,6 +174,13 @@ export interface SiteContent {
     visible: boolean;
   }[];
 
+  // AVATARES
+  avatars?: {
+    id: string;
+    name: string;
+    imageUrl: string;
+  }[];
+
   // PLATAFORMAS
   platforms?: {
     id: string;
@@ -438,6 +445,21 @@ export const defaultContent: SiteContent = {
     { id: 'sc', platform: 'SoundCloud', abbr: 'SC', url: '#', visible: true },
     { id: 'tt', platform: 'TikTok', abbr: 'TT', url: '#', visible: true },
     { id: 'ap', platform: 'Apple Podcasts', abbr: 'AP', url: '#', visible: true },
+  ],
+
+  avatars: [
+    { id: 'av1', name: 'Viajero', imageUrl: '' },
+    { id: 'av2', name: 'Explorador', imageUrl: '' },
+    { id: 'av3', name: 'Nomade', imageUrl: '' },
+    { id: 'av4', name: 'Astronauta', imageUrl: '' },
+    { id: 'av5', name: 'Pirata', imageUrl: '' },
+    { id: 'av6', name: 'Detective', imageUrl: '' },
+    { id: 'av7', name: 'Brujita', imageUrl: '' },
+    { id: 'av8', name: 'Robot', imageUrl: '' },
+    { id: 'av9', name: 'Fantasma', imageUrl: '' },
+    { id: 'av10', name: 'Gato', imageUrl: '' },
+    { id: 'av11', name: 'Alien', imageUrl: '' },
+    { id: 'av12', name: 'Calavera', imageUrl: '' },
   ],
 
   platforms: [

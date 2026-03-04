@@ -30,8 +30,8 @@ export const Hero: React.FC = () => {
           { x: 62, y: 5 }, { x: 95, y: 65 }, { x: 28, y: 55 }, { x: 85, y: 15 },
           { x: 15, y: 48 }, { x: 55, y: 85 }, { x: 42, y: 25 }, { x: 75, y: 48 },
         ].map((pos, i) => {
-          const size = [2, 2, 3, 2, 3, 2, 4, 2, 3, 2, 2, 3, 2, 3, 2, 4, 2, 3, 2, 2, 3, 2, 3, 2][i];
-          const colors = ['rgba(196,85,85,0.5)', 'rgba(138,155,196,0.35)', 'rgba(212,197,176,0.25)'];
+          const size = [3, 3, 4, 3, 4, 3, 5, 3, 4, 3, 3, 4, 3, 4, 3, 5, 3, 4, 3, 3, 4, 3, 4, 3][i];
+          const colors = ['rgba(196,85,85,0.7)', 'rgba(138,155,196,0.5)', 'rgba(212,197,176,0.45)'];
           const durations = [7, 9, 8, 11, 10, 7, 12, 8, 9, 10, 11, 7, 8, 12, 9, 10, 7, 11, 8, 9, 10, 12, 7, 8];
           return (
             <div key={`hp-${i}`} className="absolute rounded-full animate-float"
@@ -81,7 +81,7 @@ export const Hero: React.FC = () => {
               animate={{ opacity: [0.3, 0.6, 0.3] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
             />
-            <img src={hero.imageUrl} alt={hero.title || 'sodaroja'} className="relative z-10 w-full" style={{ mixBlendMode: 'screen' }} />
+            <img src={hero.imageUrl} alt={hero.title || 'sodaroja'} className="relative z-10 w-full"  />
           </motion.div>
         ) : heroLogo ? (
           /* Logotipo brand — the main brand display */
@@ -97,7 +97,7 @@ export const Hero: React.FC = () => {
               animate={{ opacity: [0.2, 0.5, 0.2] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
             />
-            <img src={heroLogo} alt="sodaroja" className="relative z-10 h-20 sm:h-28 md:h-36 mx-auto object-contain" style={{ mixBlendMode: 'screen' }} />
+            <img src={heroLogo} alt="sodaroja" className="relative z-10 h-20 sm:h-28 md:h-36 mx-auto object-contain"  />
           </motion.div>
         ) : (
           /* Fallback: SVG carita */
