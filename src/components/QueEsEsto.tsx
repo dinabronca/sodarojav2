@@ -28,6 +28,7 @@ export const QueEsEsto: React.FC = () => {
 
   return (
     <section id="que-es-esto" className="relative py-28 sm:py-36 px-6 overflow-hidden">
+      <span className="section-number">01</span>
 
       {/* ===== CAPA 0: FONDO ANTENAS — treated ===== */}
       <div className="absolute inset-0">

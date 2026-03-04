@@ -102,7 +102,7 @@ export const Navbar: React.FC = () => {
       {mobileOpen && (
         <div className="fixed inset-0 z-[8999] lg:hidden" onClick={() => setMobileOpen(false)}>
           <div className="absolute inset-0 bg-soda-night/90" />
-          <div className="absolute top-0 right-0 w-72 h-full bg-soda-night border-l border-soda-mist/10 pt-20 px-6 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="absolute top-0 right-0 w-72 h-full bg-soda-night border-l border-soda-mist/8 pt-20 px-6 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="space-y-1">
               {menuItems.map((item) => {
                 const active = isActive(item.href);
@@ -117,7 +117,7 @@ export const Navbar: React.FC = () => {
                 );
               })}
             </div>
-            <div className="mt-8 pt-6 border-t border-soda-mist/10">
+            <div className="mt-8 pt-6 border-t border-soda-mist/8">
               {isLoggedIn ? (
                 <Link to="/mi-cuenta" onClick={() => setMobileOpen(false)} className="block w-full py-3 text-center text-[11px] tracking-[0.15em] uppercase text-soda-fog/50 border border-soda-mist/15 rounded-sm">Mi Cuenta</Link>
               ) : (

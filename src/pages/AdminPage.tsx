@@ -651,6 +651,32 @@ export const AdminPage: React.FC = () => {
               </div>
             </div>
 
+            
+            {/* Plataformas */}
+            <div className={cc}>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-serif text-soda-glow">Plataformas (Escucha en)</h2>
+                <button className="text-soda-accent text-xs" onClick={() => {
+                  const pl = (content as any).platforms || [];
+                  update('platforms', [...pl, { id: 'plt-'+Date.now(), name: 'Nueva', url: '#', visible: true }]);
+                }}>+ Agregar</button>
+              </div>
+              <p className={nc + ' mb-4'}>Plataformas donde se puede escuchar el podcast. Aparecen en la seccion Escucha en.</p>
+              {((content as any).platforms || []).map((pl: any, i: number) => (
+                <div key={pl.id} className="flex items-center gap-3 mb-2 border border-soda-mist/10 p-3 rounded-sm">
+                  <button onClick={() => {
+                    const arr = [...(content as any).platforms]; arr[i] = { ...arr[i], visible: !arr[i].visible };
+                    update('platforms', arr);
+                  }} className={}>
+                    {pl.visible ? 'ON' : 'OFF'}
+                  </button>
+                  <input type="text" value={pl.name} onChange={(e) => { const arr = [...(content as any).platforms]; arr[i] = { ...arr[i], name: e.target.value }; update('platforms', arr); }} className={ic + ' flex-1'} placeholder="Nombre" />
+                  <input type="text" value={pl.url} onChange={(e) => { const arr = [...(content as any).platforms]; arr[i] = { ...arr[i], url: e.target.value }; update('platforms', arr); }} className={ic + ' flex-[2]'} placeholder="URL del perfil" />
+                  <button onClick={() => { const arr = [...(content as any).platforms]; arr.splice(i, 1); update('platforms', arr); }} className="text-soda-red/40 hover:text-soda-red text-xs">x</button>
+                </div>
+              ))}
+            </div>
+
             {/* Sponsors */}
             <div className={cc}>
               <div className="flex items-center justify-between mb-4">

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { X, ExternalLink, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { getCurrentUser } from '../data/auth';
+import { miniPlayerShow, miniPlayerHide } from './MiniPlayer';
 
 interface Episode {
   id: string; city: string; title: string; description: string; imageUrl: string;
@@ -51,7 +52,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
   }, [isExpanded]);
 
   const handleCardClick = () => {
-    if (!isLocked) { setIsExpanded(true); if (!listened) setShowListenPrompt(true); }
+    if (!isLocked) { setIsExpanded(true); miniPlayerShow({ episodeTitle: episode.title, city: episode.city, imageUrl: episode.imageUrl, episodeId: episode.id }); if (!listened) setShowListenPrompt(true); }
   };
 
   // Auto-mark as listened after 60 seconds with modal open (implies user is engaging with embed)
@@ -247,6 +248,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
               <h2 className="text-3xl sm:text-4xl font-serif text-soda-glow mb-2">&ldquo;{episode.title}&rdquo;</h2>
               <p className="text-soda-lamp/75 text-sm font-light leading-relaxed mb-6">{episode.description}</p>
 
+              {/* Embeds */}
               <div className="space-y-5 mb-6">
                 {(embeds as any).youtube && (<div><span className="text-soda-lamp/45 text-[10px] tracking-[0.2em] block mb-2">YOUTUBE</span><div className="relative w-full rounded-sm overflow-hidden" style={{ paddingBottom: '56.25%' }}><iframe src={(embeds as any).youtube} className="absolute inset-0 w-full h-full" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen loading="lazy" /></div></div>)}
                 {embeds.spotify && (<div><span className="text-soda-lamp/45 text-[10px] tracking-[0.2em] block mb-2">SPOTIFY</span><iframe src={embeds.spotify} width="100%" height={isMobile ? "152" : "232"} frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style={{ borderRadius: '8px' }} /></div>)}
@@ -255,6 +257,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
                 {embeds.soundcloud && (<div><span className="text-soda-lamp/45 text-[10px] tracking-[0.2em] block mb-2">SOUNDCLOUD</span><iframe src={embeds.soundcloud} width="100%" height={isMobile ? "120" : "166"} frameBorder="0" allow="autoplay" loading="lazy" /></div>)}
               </div>
 
+              {/* External links */}
               {Object.values(links).some(v => v) && (
                 <div className="mb-6">
                   <span className="text-soda-lamp/50 text-[10px] tracking-[0.2em] block mb-3">ESCUCHAR EN</span>
@@ -268,6 +271,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
                 </div>
               )}
 
+              {/* Gallery */}
               {gallery.length > 0 && (
                 <div className="mb-6">
                   <span className="text-soda-lamp/50 text-[10px] tracking-[0.2em] block mb-3">GALERIA</span>
@@ -284,6 +288,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
                 </div>
               )}
 
+              {/* Listen prompt */}
               {showListenPrompt && !listened && (
                 <div className="border-t border-soda-mist/10 pt-5 mt-4">
                   <p className="text-soda-lamp/65 text-sm text-center mb-3">Ya escuchaste este episodio?</p>
@@ -302,6 +307,7 @@ export const EpisodeCard: React.FC<{ episode: Episode; isNewest?: boolean; episo
             </div>
           </motion.div>
 
+          {/* Zoom overlay */}
           {zoomedImg && (
             <div className="fixed inset-0 z-[10001] flex items-center justify-center p-4 bg-soda-night/90" onClick={(e) => { e.stopPropagation(); setZoomedImg(null); }}>
               <motion.img src={zoomedImg} alt="Zoom" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="max-w-full max-h-[85vh] object-contain rounded-sm" />

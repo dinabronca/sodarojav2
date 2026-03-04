@@ -207,7 +207,8 @@ const SubscriberDashboard: React.FC = () => {
   // Sorteo banner: 800×200 px
 
   return (
-    <div className="space-y-10 relative" style={{ zIndex: 2 }}>
+    <div className="space-y-10 relative vhs-glitch" style={{ zIndex: 2 }}>
+      <div className="glitch-bar" />
       {/* ===== HEADER — Editorial style ===== */}
       <div className="text-center">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="space-y-5">
